@@ -19,6 +19,11 @@ const routes = [
         path: '/app/profile',
         name: 'Profile',
         component: () => import('../views/ChatFlow/Profile.vue')
+      },
+      {
+        path: '/app/contacts',
+        name: 'Contact',
+        component: () => import('../views/ChatFlow/Contact.vue')
       }
     ]
   },
