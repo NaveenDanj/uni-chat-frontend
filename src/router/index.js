@@ -29,6 +29,11 @@ const routes = [
         path: '/app/bookmark',
         name: 'Bookmark',
         component: () => import('../views/ChatFlow/Bookmark.vue')
+      },
+      {
+        path: '/app/settings',
+        name: 'Settings',
+        component: () => import('../views/ChatFlow/Settings.vue')
       }
     ]
   },
