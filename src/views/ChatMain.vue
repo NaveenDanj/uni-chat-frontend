@@ -1,8 +1,10 @@
 <template>
   <div class="main white--text">
-    <div class="detailSection">asd</div>
+    <div class="detailSection">
+      <router-view />
+    </div>
 
-    <div class="chatSection">asd</div>
+    <div class="chatSection"></div>
   </div>
 </template>
 
@@ -14,22 +16,25 @@ export default {
 
 <style scoped>
 .main {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
 }
 
 .detailSection {
+  overflow-y: hidden;
   height: 100vh;
   width: 318px;
   background-color: #262626;
 }
 
+.detailSection:hover{
+  overflow-y: scroll;
+}
+
 .chatSection {
-  height: 100vh;
+  min-height: 100vh;
   flex-grow: 1;
   background-color: #2e2e2e;
 }
-
-
 </style>

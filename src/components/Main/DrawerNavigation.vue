@@ -23,6 +23,7 @@
         :key="item.title"
         link
         style="margin-bottom: 10px"
+        :to="item.link"
       >
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
@@ -48,12 +49,12 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: "Profile", icon: "mdi-face-man-profile" },
-        { title: "Chat", icon: "mdi-forum" },
-        { title: "Contacts", icon: "mdi-contacts" },
-        { title: "Calls", icon: "mdi-phone" },
-        { title: "Bookmark", icon: "mdi-bookmark-multiple" },
-        { title: "Settings", icon: "mdi-cog-outline" },
+        { title: "Profile", icon: "mdi-face-man-profile" , link: '/app/profile' },
+        { title: "Chat", icon: "mdi-forum" , link: '/app/chat'},
+        { title: "Contacts", icon: "mdi-contacts" , link: '/app/contacts' },
+        { title: "Calls", icon: "mdi-phone" , link: '/app/calls' },
+        { title: "Bookmark", icon: "mdi-bookmark-multiple" , link: '/app/bookmark' },
+        { title: "Settings", icon: "mdi-cog-outline" , link: '/app/settings' },
       ],
     };
   },

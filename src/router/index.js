@@ -8,7 +8,14 @@ const routes = [
   {
     path: '/',
     name: 'ChatMain',
-    component: ChatMain
+    component: ChatMain,
+    children : [
+      {
+        path: '/app/chat',
+        name: 'Chat',
+        component: () => import('../views/ChatFlow/Chat.vue')
+      }
+    ]
   },
   // {
   //   path: '/about',
