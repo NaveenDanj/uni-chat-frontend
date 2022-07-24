@@ -35,7 +35,7 @@
             link
             style="font-size: 10px;"
           >
-            <v-list-item-avatar height="30" width="30">
+            <v-list-item-avatar size="30px">
               <img src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg" />
             </v-list-item-avatar>
     
@@ -63,7 +63,7 @@
             link
             style="font-size: 10px;"
           >
-            <v-list-item-avatar height="30" width="30">
+            <v-list-item-avatar size="30px">
               <img src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg" />
             </v-list-item-avatar>
     
@@ -91,7 +91,7 @@
             link
             style="font-size: 10px;"
           >
-            <v-list-item-avatar height="30" width="30">
+            <v-list-item-avatar size="30px">
               <v-icon>mdi-pound</v-icon>
 
             </v-list-item-avatar>

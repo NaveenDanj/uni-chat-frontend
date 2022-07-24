@@ -29,7 +29,7 @@ export default {
 }
 
 .detailSection:hover{
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .chatSection {
