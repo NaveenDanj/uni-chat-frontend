@@ -6,14 +6,20 @@
 
             <div class="header d-flex justify-space-between">
                 
-                
                 <div class="d-flex my-auto">
-                    <v-avatar size="40px" class="mx-auto">
+
+                    <div class="my-auto mr-2">
+                        <v-btn icon dark small>
+                            <v-icon>mdi-arrow-left-circle</v-icon>
+                        </v-btn>
+                    </div>
+
+                    <v-avatar @click="drawer = true" size="40px" class="my-auto">
                         <img src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg" />
                     </v-avatar>
 
                     <div class="my-auto ml-3">
-                        <label>Bella Cote</label><br />
+                        <label @click="drawer = true">Bella Cote</label><br />
                         <label style="font-size : 11px;">Online</label>
                     </div>
 
@@ -95,10 +101,25 @@
 
         </div>
 
+        <ProfileDetail :drawer="drawer" @drawClose="drawer = false " />
+
 
     </div>
 
 </template>
+
+<script>
+import ProfileDetail from './ProfileDetail.vue';
+export default {
+    components: { ProfileDetail },
+
+    data(){
+        return{
+            drawer : false,
+        }
+    }
+}
+</script>
 
 
 <style>

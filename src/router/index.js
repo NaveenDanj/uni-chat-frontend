@@ -9,6 +9,7 @@ const routes = [
     path: '/',
     name: 'ChatMain',
     component: ChatMain,
+    redirect: 'app/chat',
     children : [
       {
         path: '/app/chat',

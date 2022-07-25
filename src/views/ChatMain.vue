@@ -31,6 +31,7 @@ export default {
   overflow-y: hidden;
   height: 100vh;
   min-width:300px;
+  max-width: 300px;
   background-color: #262626;
 }
 
