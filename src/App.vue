@@ -36,4 +36,8 @@ export default {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* remove page scrollbar */
+
+
 </style>
