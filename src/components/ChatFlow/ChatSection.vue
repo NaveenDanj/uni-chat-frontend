@@ -8,8 +8,8 @@
                 
                 <div class="d-flex my-auto">
 
-                    <div class="my-auto mr-2">
-                        <v-btn icon dark small>
+                    <div class="my-auto mr-2 backBtn">
+                        <v-btn @click="() => $emit('backEvent') " icon dark small>
                             <v-icon>mdi-arrow-left-circle</v-icon>
                         </v-btn>
                     </div>
@@ -44,7 +44,7 @@
     
             <div class="contentMain">
                 
-                <div style="max-width : 50%;">
+                <div style="max-width : 80%;">
 
                     <div class="pa-3 ml-10" style="background-color: #383838;">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio fugiat molestias consectetur molestiae sunt eveniet eaque, officia nisi quisquam iusto! Quas eveniet saepe ipsa accusantium, ab quibusdam a! Illo, aperiam!</p>
@@ -61,7 +61,7 @@
 
                 </div>
 
-                <div style="max-width : 50%; float: right; ">
+                <div style="max-width : 80%; float: right; ">
 
                     <div class="pa-3 ml-10" style="background-color: rgba(53, 75, 60, 0.5);">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio fugiat molestias consectetur molestiae sunt eveniet eaque, officia nisi quisquam iusto! Quas eveniet saepe ipsa accusantium, ab quibusdam a! Illo, aperiam!</p>
@@ -155,6 +155,14 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: row;
+}
+
+@media (min-width: 880px) {
+
+ .backBtn {
+    display: none;
+ }
+
 }
 
 </style>

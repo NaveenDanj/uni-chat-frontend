@@ -34,6 +34,7 @@
             dense
             link
             style="font-size: 10px;"
+            @click="$emit('chatSelect',item.id)"
           >
             <v-list-item-avatar size="30px">
               <img src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg" />
