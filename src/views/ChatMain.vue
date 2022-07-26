@@ -37,8 +37,17 @@ export default {
 
     handleChatSelect(id){
       console.log('id', id);
-      this.showChatSection = true;
-      this.showDetailSection = false;
+
+      if(this.$screen.width > 880){
+        this.showChatSection = true;
+        this.showDetailSection = true;
+      }else{
+        this.showChatSection = true;
+        this.showDetailSection = false;
+      }
+
+      // this.showChatSection = true;
+      // this.showDetailSection = false;
     }
 
   },
