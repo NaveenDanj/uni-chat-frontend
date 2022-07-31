@@ -9,7 +9,7 @@ const routes = [
     path: '/',
     name: 'ChatMain',
     component: ChatMain,
-    // redirect: 'app/chat',
+    redirect: 'app/chat',
     children : [
       {
         path: '/app/chat',
@@ -42,10 +42,10 @@ const routes = [
     path: '/auth/login',
     name: 'Login',
     component: () => import('../views/Auth/Login.vue')
-  },
-  {
+  }
+  ,{
     path: '/auth/register',
-    name: 'Login',
+    name: 'Register',
     component: () => import('../views/Auth/Register.vue')
   }
   // {

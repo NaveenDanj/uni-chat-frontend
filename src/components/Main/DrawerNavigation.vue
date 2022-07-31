@@ -35,8 +35,10 @@
     </v-list>
 
     <template v-slot:append>
-      <v-list-item-icon class="ml-3">
-        <v-icon>mdi-logout</v-icon>
+      <v-list-item-icon>
+        <v-btn icon small fab  class="mx-auto ml-2" @click="() => $router.push('/auth/login')">
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
       </v-list-item-icon>
     </template>
   </v-navigation-drawer>
