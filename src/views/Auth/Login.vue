@@ -40,7 +40,7 @@
                         </div>
 
                         <div>
-                            <v-btn large color="#5645AA" dark rounded>Sign in</v-btn>
+                            <v-btn large color="#4EAC6D" dark rounded>Sign in</v-btn>
                         </div>
 
 
@@ -49,10 +49,10 @@
 
             </v-col>
 
-            <v-col cols="12" md="6" style="background-color : #7F62FB">
+            <v-col cols="12" md="6" style="background-color : #4EAC6D">
                 <div class="formContainer">
                     <div class="logoContainer">
-                        <center><img width="250" src="https://templates.iqonic.design/server360/html-dark/images/logo-full.png" /></center><br/>
+                        <center><h1 class="title">UNI-CHAT</h1></center><br/>
                         <label>Enter your personal details and start journey with us</label><br/>
                         <center><v-btn dense outlined width="150" dark rounded>Sign up</v-btn></center>
                     </div>
@@ -70,6 +70,7 @@
 
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Lobster&display=swap');
 .containerr {
 
     background-color : #010203;
@@ -81,6 +82,13 @@
     justify-content: center;
     align-items: center;
 
+}
+
+.title{
+    color : white;
+    font-size : 50px;
+    font-weight : 700;
+    font-family: 'Lobster';
 }
 
 .loginContainer{
