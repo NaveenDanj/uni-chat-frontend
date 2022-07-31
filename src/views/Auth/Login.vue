@@ -8,19 +8,34 @@
             <v-col cols="12" md="6" style="background-color : #080E15">
 
                 <div class="formContainer">
-                    <form>
+                    <v-form @submit="handleLogin" ref="loginForm">
                         <center><h1>Sign in</h1>
                         <label>Enter your email address and password to access admin panel.</label>
                         </center>
 
-                        <div class="mt-10">
+                        <v-alert
+                            v-model="errorShow"
+                            class="mt-5"
+                            dense
+                            outlined
+                            type="error"
+                        >
+                            I'm a dense alert with the <strong>outlined</strong> prop and a <strong>type</strong> of error
+                        </v-alert>
+
+                        <div class="mt-5">
                             <label>Email address</label>
                             <v-text-field
+                                v-model="form.email"
                                 placeholder="Enter email"
                                 outlined
                                 dense
                                 dark
                                 class="mt-3"
+                                :rules="[
+                                    v => !!v || 'Email is required',
+                                    v => /.+@.+/.test(v) || 'E-mail must be valid',
+                                ]"
                             />
                         </div>
 
@@ -30,21 +45,26 @@
                                 <label style="cursor : pointer;">Forgot password?</label>
                             </div>
                             <v-text-field
-                                type="password"
+                                v-model="form.password"
                                 placeholder="Password"
+                                type="password"
                                 outlined
                                 dense
                                 dark
                                 class="mt-3"
+                                :rules="[
+                                    v => !!v || 'Password is required',
+                                    v => v.length >= 8 || 'Password must be more than 8 characters',
+                                ]"
                             />
                         </div>
 
                         <div>
-                            <v-btn large color="#4EAC6D" dark rounded>Sign in</v-btn>
+                            <v-btn type="submit" large color="#4EAC6D" dark rounded>Sign in</v-btn>
                         </div>
 
 
-                    </form>
+                    </v-form>
                 </div>
 
             </v-col>
@@ -67,6 +87,43 @@
 
   </div>
 </template>
+
+
+<script>
+export default {
+
+    data(){
+        return{
+            form:{
+                email : '',
+                password : ''
+            },
+
+            error : '',
+            errorShow : false
+        }
+    },
+    
+    methods : {
+
+        handleLogin(e){
+            e.preventDefault();
+            console.log('login');
+
+            if(!this.$refs.loginForm.validate()){
+                return;
+            }
+
+            console.log('valid!');
+
+        }
+
+
+    }
+
+
+}
+</script>
 
 
 <style scoped>
