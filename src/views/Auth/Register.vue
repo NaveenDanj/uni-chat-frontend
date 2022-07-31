@@ -10,7 +10,7 @@
                     <div class="logoContainer">
                         <center><h1 class="title">UNI-CHAT</h1></center><br/>
                         <label>To Keep connected with us please login with your personal info</label><br/>
-                        <center><v-btn dense outlined width="150" dark rounded>Sign up</v-btn></center>
+                        <center><v-btn @click="() => $router.push('/auth/login')" dense outlined width="150" dark rounded>Sign in</v-btn></center>
                     </div>
                 </div>
             </v-col>

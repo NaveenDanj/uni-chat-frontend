@@ -74,7 +74,7 @@
                     <div class="logoContainer">
                         <center><h1 class="title">UNI-CHAT</h1></center><br/>
                         <label>Enter your personal details and start journey with us</label><br/>
-                        <center><v-btn dense outlined width="150" dark rounded>Sign up</v-btn></center>
+                        <center><v-btn @click="() => $router.push('/auth/register')" dense outlined width="150" dark rounded>Sign up</v-btn></center>
                     </div>
                 </div>
             </v-col>
