@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <DrawerNavigation />
+    
 
     <v-main>
       <router-view />

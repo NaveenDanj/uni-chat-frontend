@@ -1,5 +1,10 @@
 <template>
-  <div class="main white--text overflow-hidden">
+
+  <div>
+
+    <DrawerNavigation />
+
+    <div class="main white--text overflow-hidden">
 
     <div v-if="showDetailSection" class="detailSection">
       <router-view
@@ -12,14 +17,21 @@
     </div>
     
   </div>
+
+  </div>
+
+
+  
 </template>
 
 <script>
 import ChatSection from "../components/ChatFlow/ChatSection.vue";
+import DrawerNavigation from "../components/Main/DrawerNavigation.vue";
+
 export default {
   name: "Home",
 
-  components: { ChatSection },
+  components: { ChatSection , DrawerNavigation },
 
   data() {
     return {
