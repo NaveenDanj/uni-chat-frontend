@@ -19,7 +19,6 @@ mountApp();
 async function mountApp(){
 
   let app_token = localStorage.getItem('token');
-  console.log('ran' , app_token);
 
   if(app_token == null){
     new Vue({

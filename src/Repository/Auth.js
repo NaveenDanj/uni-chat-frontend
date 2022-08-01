@@ -23,6 +23,18 @@ export default {
             }
         })
 
+    },
+
+    async logout(){
+
+        return api.post('/auth/logout' , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
+
     }
 
 }

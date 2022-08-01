@@ -36,7 +36,7 @@
 
     <template v-slot:append>
       <v-list-item-icon>
-        <v-btn icon small fab  class="mx-auto ml-2" @click="() => $router.push('/auth/login')">
+        <v-btn icon small fab  class="mx-auto ml-2" @click="handleLogout">
           <v-icon>mdi-logout</v-icon>
         </v-btn>
       </v-list-item-icon>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import Auth from '../../Repository/Auth';
+
 export default {
   data() {
     return {
@@ -59,6 +61,29 @@ export default {
       ],
     };
   },
+
+  methods : {
+    async handleLogout(){
+
+      try{
+
+        await Auth.logout();
+        this.$store.commit('setCurrentUser' , null);
+        localStorage.removeItem('token');
+        this.$router.push('/auth/login');
+        
+      }catch(err){
+        console.log(err);
+      }finally{
+        localStorage.removeItem('token');
+        this.$store.commit('setCurrentUser' , null);
+        localStorage.removeItem('token');
+        this.$router.push('/auth/login');
+
+      }
+
+    }
+  }
 
 };
 </script>
