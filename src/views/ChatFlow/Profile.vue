@@ -70,6 +70,12 @@
                     >California, USA</label
                   >
                 </div>
+                <div class="d-flex mt-2">
+                  <v-icon small class="my-auto" dark>mdi-share-circle</v-icon>
+                  <label class="ml-5 my-auto" style="font-size: 13px"
+                    >c9e461dd-4680-4df0-a88f-4c61cabcb47a</label
+                  >
+                </div>
               </div>
               
       

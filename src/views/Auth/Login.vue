@@ -20,7 +20,7 @@
                             outlined
                             type="error"
                         >
-                            I'm a dense alert with the <strong>outlined</strong> prop and a <strong>type</strong> of error
+                           {{ error }}
                         </v-alert>
 
                         <div class="mt-5">
@@ -90,6 +90,9 @@
 
 
 <script>
+
+import Auth from '../../Repository/Auth'
+
 export default {
 
     data(){
@@ -106,7 +109,7 @@ export default {
     
     methods : {
 
-        handleLogin(e){
+        async handleLogin(e){
             e.preventDefault();
             console.log('login');
 
@@ -116,7 +119,22 @@ export default {
 
             console.log('valid!');
 
-            
+            try{
+                this.errorShow = false;
+                let res = await Auth.login({
+                    email : this.form.email,
+                    password : this.form.password,
+                    device_name : navigator.userAgent
+                });
+                this.$store.commit('setCurrentUser' , res.data.user);
+                localStorage.setItem('token' , res.data.token);
+                this.$router.push('/app/chat');
+            }catch(err){
+                console.log(err);
+                this.error = err.response.data.error;
+                this.errorShow = true;
+            }
+
 
         }
 

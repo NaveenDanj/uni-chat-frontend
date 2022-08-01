@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ChatMain from '../views/ChatMain.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -14,27 +15,32 @@ const routes = [
       {
         path: '/app/chat',
         name: 'Chat',
-        component: () => import('../views/ChatFlow/Chat.vue')
+        component: () => import('../views/ChatFlow/Chat.vue'),
+        meta: { requiresAuth: true} 
       },
       {
         path: '/app/profile',
         name: 'Profile',
-        component: () => import('../views/ChatFlow/Profile.vue')
+        component: () => import('../views/ChatFlow/Profile.vue'),
+        meta: { requiresAuth: true} 
       },
       {
         path: '/app/contacts',
         name: 'Contact',
-        component: () => import('../views/ChatFlow/Contact.vue')
+        component: () => import('../views/ChatFlow/Contact.vue'),
+        meta: { requiresAuth: true} 
       },
       {
         path: '/app/bookmark',
         name: 'Bookmark',
-        component: () => import('../views/ChatFlow/Bookmark.vue')
+        component: () => import('../views/ChatFlow/Bookmark.vue'),
+        meta: { requiresAuth: true} 
       },
       {
         path: '/app/settings',
         name: 'Settings',
-        component: () => import('../views/ChatFlow/Settings.vue')
+        component: () => import('../views/ChatFlow/Settings.vue'),
+        meta: { requiresAuth: true} 
       }
     ]
   },
@@ -63,5 +69,23 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.state.currentUser == null || localStorage.getItem('token') == null ) {
+      next({
+        path: '/auth/login',
+        query: {
+          redirect: to.fullPath,
+        },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+})
+
 
 export default router

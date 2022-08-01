@@ -11,6 +11,18 @@ export default {
             }
         });
 
+    },
+
+    async getCurrentUser(){
+
+        return api.get('/auth/current-user' , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        })
+
     }
 
 }
