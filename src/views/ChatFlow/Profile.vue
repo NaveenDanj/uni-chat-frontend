@@ -31,8 +31,8 @@
       </div>
       <div class="mt-1">
         <center>
-          <h3>Adam Zampa</h3>
-          <label>Front end Developer</label>
+          <h3>{{ fullname() }}</h3>
+          <label>{{ designation() }}</label>
         </center>
       </div>
     </div>
@@ -45,15 +45,14 @@
             <div class="pa-3">
       
               <p>
-                If several languages coalesce, the grammar of the resulting language
-                is more simple.
+                {{ about() }}
               </p>
       
               <div>
                 <div class="d-flex">
                   <v-icon small class="my-auto" dark>mdi-account</v-icon>
                   <label class="ml-5 my-auto" style="font-size: 13px"
-                    >Adam Zampa</label
+                    >{{ fullname() }}</label
                   >
                 </div>
                 <div class="d-flex mt-2">
@@ -61,19 +60,19 @@
                     >mdi-message-reply-text-outline</v-icon
                   >
                   <label class="ml-5 my-auto" style="font-size: 13px"
-                    >adc@123.com</label
+                    >{{ email() }}</label
                   >
                 </div>
                 <div class="d-flex mt-2">
                   <v-icon small class="my-auto" dark>mdi-map-marker</v-icon>
                   <label class="ml-5 my-auto" style="font-size: 13px"
-                    >California, USA</label
+                    >{{ location() }}</label
                   >
                 </div>
                 <div class="d-flex mt-2">
                   <v-icon small class="my-auto" dark>mdi-share-circle</v-icon>
                   <label class="ml-5 my-auto" style="font-size: 13px"
-                    >c9e461dd-4680-4df0-a88f-4c61cabcb47a</label
+                    >{{ userId() }}</label
                   >
                 </div>
               </div>
@@ -147,3 +146,69 @@
 
   </div>
 </template> 
+
+<script>
+export default {
+  
+  methods : {
+
+    fullname(){
+
+      if(!this.$store.state.currentUser){
+        return 'loading...'
+      }
+
+      return this.$store.state.currentUser.fullname
+    },
+
+    designation(){
+
+      if(!this.$store.state.currentUser){
+        return 'loading...'
+      }
+
+      return this.$store.state.currentUser.designation || 'No designation'
+    },
+
+    about(){
+
+      if(!this.$store.state.currentUser){
+        return 'loading...'
+      }
+
+      return this.$store.state.currentUser.about || 'No description'
+    },
+
+    email(){
+
+      if(!this.$store.state.currentUser){
+        return 'loading...'
+      }
+
+      return this.$store.state.currentUser.email
+    },
+
+    location(){
+
+      if(!this.$store.state.currentUser){
+        return 'loading...'
+      }
+
+      return this.$store.state.currentUser.location || 'No location'
+    },
+
+    userId(){
+
+      if(!this.$store.state.currentUser){
+        return 'loading...'
+      }
+
+      return this.$store.state.currentUser.userId
+    }
+
+  
+  }
+
+
+}
+</script>

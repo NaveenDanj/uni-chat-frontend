@@ -92,6 +92,7 @@
 <script>
 
 import Auth from '../../Repository/Auth'
+const { io } = require("socket.io-client");
 
 export default {
 
@@ -128,6 +129,10 @@ export default {
                 });
                 this.$store.commit('setCurrentUser' , res.data.user);
                 localStorage.setItem('token' , res.data.token);
+
+                const socket = io("http://localhost:3030");
+                this.$store.commit('setSocket' , socket);
+
                 this.$router.push('/app/chat');
             }catch(err){
                 console.log(err);

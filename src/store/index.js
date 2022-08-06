@@ -6,14 +6,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
 
-    currentUser : null
-
+    currentUser : null,
+    socket : null
   },
   
   mutations: {
 
     setCurrentUser(state, user) {
       state.currentUser = user
+    },
+
+    setSocket(state , socket) {
+      state.socket = socket;
     }
     
   },

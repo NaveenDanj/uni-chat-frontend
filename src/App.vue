@@ -10,9 +10,15 @@
 
 <script>
 import DrawerNavigation from "./components/Main/DrawerNavigation.vue";
+
 export default {
   name: "App",
   components: { DrawerNavigation },
+
+  created(){
+    console.log('socket instance is : ' , this.$store.state.socket);
+  }
+
 };
 </script>
 
