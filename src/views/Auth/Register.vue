@@ -19,30 +19,64 @@
             <v-col cols="12" md="6" style="background-color : #080E15">
 
                 <div class="formContainer">
-                    <form>
+                    <v-form @submit="handleRegister" ref="regForm">
                         <center><h1>Sign Up</h1>
                         <label>Enter your email address and password to access admin panel.</label>
                         </center>
 
+                        <v-alert
+                            v-model="errorShow"
+                            class="mt-5"
+                            dense
+                            outlined
+                            type="error"
+                        >
+                           {{ error }}
+                        </v-alert>
+
                         <div class="mt-10">
                             <label>Full Name</label>
                             <v-text-field
+                                v-model="form.fullname"
                                 placeholder="Your Full Name"
                                 outlined
                                 dense
                                 dark
                                 class="mt-3"
+                                :rules="[
+                                    v => !!v || 'Full name is required',
+                                ]"
                             />
                         </div>
 
                         <div>
                             <label>Email address</label>
                             <v-text-field
+                                v-model="form.email"
                                 placeholder="Enter email"
                                 outlined
                                 dense
                                 dark
                                 class="mt-3"
+                                :rules="[
+                                    v => !!v || 'Email is required',
+                                    v => /.+@.+/.test(v) || 'E-mail must be valid',
+                                ]"
+                            />
+                        </div>
+
+                        <div>
+                            <label>Phone Number</label>
+                            <v-text-field
+                                v-model="form.phone"
+                                placeholder="Enter Phone Number"
+                                outlined
+                                dense
+                                dark
+                                class="mt-3"
+                                :rules="[
+                                    v => !!v || 'Phone Number is required',
+                                ]"
                             />
                         </div>
 
@@ -51,21 +85,26 @@
                                 <label>Password</label>
                             </div>
                             <v-text-field
+                                v-model="form.password"
                                 type="password"
                                 placeholder="Password"
                                 outlined
                                 dense
                                 dark
                                 class="mt-3"
+                                :rules="[
+                                    v => !!v || 'Password is required',
+                                    v => v.length >= 8 || 'Password must be more than 8 characters',
+                                ]"
                             />
                         </div>
 
                         <div>
-                            <v-btn large color="#4EAC6D" dark rounded>Sign up</v-btn>
+                            <v-btn type="submit" large color="#4EAC6D" dark rounded>Sign up</v-btn>
                         </div>
 
 
-                    </form>
+                    </v-form>
                 </div>
 
             </v-col>
@@ -80,6 +119,68 @@
 
   </div>
 </template>
+
+<script>
+import Auth from '../../Repository/Auth';
+const { io } = require("socket.io-client");
+
+export default {
+    
+    data(){
+        return{
+            errorShow : false,
+            error : '',
+            form : {
+                fullname : '',
+                email : '',
+                phone : '',
+                password : '',
+            },
+        }
+    },
+
+    methods : {
+
+        async handleRegister(e){
+            e.preventDefault();
+            this.errorShow = false;
+            this.error = '';
+            try{
+
+                if(!this.$refs.regForm.validate()){
+                    return;
+                }
+
+                let form = {
+                    fullname : this.form.fullname,
+                    email : this.form.email,
+                    phone : this.form.phone,
+                    password : this.form.password,
+                    device_name : navigator.userAgent
+                };
+
+                let res = await Auth.register(form);
+
+                this.$store.commit('setCurrentUser' , res.data.user );
+                localStorage.setItem('token' , res.data.token);
+                const socket = io("http://localhost:3030");
+                socket.userId = res.data.user.userId;
+                socket.userInstance = res.data.user;
+                this.$store.commit('setSocket' , socket);
+
+                this.$router.replace('/');
+            
+            }catch(err){
+                this.errorShow = true;
+                this.error = err.response.data.error;
+            }
+
+        }
+
+    }
+
+}
+</script>
 
 
 <style scoped>

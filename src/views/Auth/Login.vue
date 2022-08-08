@@ -131,6 +131,8 @@ export default {
                 localStorage.setItem('token' , res.data.token);
 
                 const socket = io("http://localhost:3030");
+                socket.userId = res.data.user.userId;
+                socket.userInstance = res.data.user;
                 this.$store.commit('setSocket' , socket);
 
                 this.$router.push('/app/chat');

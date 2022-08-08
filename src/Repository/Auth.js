@@ -13,6 +13,17 @@ export default {
 
     },
 
+    async register(form) {
+
+        return api.post('/auth/register' , form , {
+            headers : {
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json'
+            }
+        });
+
+    },
+
     async getCurrentUser(){
 
         return api.get('/auth/current-user' , {

@@ -39,6 +39,8 @@ async function mountApp(){
     store.commit('setCurrentUser' , user.data.user);
 
     const socket = io("http://localhost:3030");
+    socket.userId = user.data.user.userId;
+    socket.userInstance = user.data.user;
     store.commit('setSocket' , socket);
 
   }catch(err){

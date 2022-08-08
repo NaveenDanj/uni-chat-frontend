@@ -40,6 +40,14 @@ export default {
     };
   },
 
+  created() {
+    console.log('chat mounted');
+    this.$store.state.socket.emit("channel:join:main");
+    this.$store.state.socket.on("channel:message:main", (data) => {
+      console.log("you have been connected to the main chat channel!" , data);
+    });
+  },
+
   methods: {
 
     handleShowSection() {
