@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import ChatStore from './Chat'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
     currentUser : null,
-    socket : null
+    socket : null,
   },
   
   mutations: {
@@ -25,5 +26,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    ChatStore,
   }
 })
