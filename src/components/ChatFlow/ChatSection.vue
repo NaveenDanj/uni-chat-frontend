@@ -44,23 +44,12 @@
 
         <div v-for="(item , index) in messagesArray" :key="index" style="width : 100%;">
 
-          <div v-if="item.userData.id != currentUser.id" class="mt-2" style="max-width: 80%; min-width: 20%;">
-            <div class="pa-3 ml-10" style="background-color: #383838">
-              <p>
-                {{ item.message }}
-              </p>
-            </div>
+          <OtherUserChatComponent
+            v-if="item.userData.id != currentUser.id"
+            :item="item"
+          />
 
-            <div class="mt-2 d-flex">
-              <v-avatar size="30px" class="my-auto">
-                <img
-                  src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg"
-                />
-              </v-avatar>
-
-              <label class="my-auto ml-2" style="font-size: 12px">10:13 am</label>
-            </div>
-          </div>
+          
 
           <div v-else class="mt-2" style="max-width: 80%; min-width: 20%; float: right">
             <div
@@ -75,7 +64,7 @@
             <div class="d-flex mt-3" style="float: right">
               <!-- read receipt icon -->
               <v-icon small style="color: #4eac6d">mdi-check-circle</v-icon>
-              <label style="font-size: 12px" class="ml-2">10:14 am</label>
+              <label style="font-size: 12px" class="ml-2">{{ formatDate(item.meta.date) }}</label>
             </div>
           </div>
 
@@ -112,9 +101,10 @@
 <script>
 import ProfileDetail from "./ProfileDetail.vue";
 import moment from "moment";
+import OtherUserChatComponent from "../ChatComponents/OtherUserChatComponent.vue";
 
 export default {
-  components: { ProfileDetail },
+  components: { ProfileDetail, OtherUserChatComponent },
 
   data() {
     return {
@@ -144,9 +134,24 @@ export default {
   },
 
   created(){
+
     this.$store.state.socket.on('channel:main:receiveMessage' , (data) => {
-      this.$store.commit('addChatMessage', data);
+
+      let check = false;    
+      for(let i = 0; i < this.$store.state.chat.chat.messages.length; i++){
+        let msgObj = this.$store.state.chat.chat.messages[i];
+        if(msgObj.id == data.id){
+          check = true;
+          break;
+        }
+      }
+
+      if(!check){
+        this.$store.commit('addChatMessage', data);
+      }
+
     });
+
   },
 
   methods : {
@@ -170,7 +175,8 @@ export default {
           meta : {
             date : new Date(),
           },
-          userData : this.$store.state.currentUser
+          userData : this.$store.state.currentUser,
+          id : Date.now()+'' + this.$store.state.socket.id
         });
 
         this.message = '';
@@ -179,7 +185,15 @@ export default {
     },
 
     formatDate(date){
-      return moment(date).format('MMM Do YYYY, h:mm a');
+
+      // if date is today then return time
+      if(moment(date).isSame(moment(), 'day')){
+        return moment(date).format('h:mm a');
+      }
+      else{
+        return moment(date).format('MMM DD');
+      }
+
     },
 
     scrollToElement() {
