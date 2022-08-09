@@ -49,9 +49,7 @@
         <div class="d-flex justify-space-between">
             <label class="my-auto" style="font-size : 10px;">DIRECT MESSAGES</label>
             <div class="my-auto">
-                <v-btn color="success" fab outlined text x-small>
-                    <v-icon color="success">mdi-plus</v-icon>
-                </v-btn>
+              <DirectContact />
             </div>
         </div>
         <v-list dense dark color="#262626">
@@ -109,6 +107,7 @@
 <script>
 import CreateChannel from '../../components/Dialogs/CreateChannel.vue';
 import AddContact from '../../components/Dialogs/AddContact.vue';
+import DirectContact from '../../components/Dialogs/DirectContact.vue';
 export default {
     data() {
         return {
@@ -121,6 +120,6 @@ export default {
             ],
         };
     },
-    components: { CreateChannel, AddContact }
+    components: { CreateChannel, AddContact, DirectContact }
 }
 </script>
