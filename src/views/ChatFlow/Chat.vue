@@ -6,9 +6,7 @@
       </div>
 
       <div class="my-auto">
-        <v-btn color="success" fab outlined x-small>
-          <v-icon color="success">mdi-plus</v-icon>
-        </v-btn>
+        <AddContact />
       </div>
     </div>
 
@@ -110,6 +108,7 @@
 
 <script>
 import CreateChannel from '../../components/Dialogs/CreateChannel.vue';
+import AddContact from '../../components/Dialogs/AddContact.vue';
 export default {
     data() {
         return {
@@ -122,6 +121,6 @@ export default {
             ],
         };
     },
-    components: { CreateChannel }
+    components: { CreateChannel, AddContact }
 }
 </script>

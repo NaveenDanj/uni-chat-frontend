@@ -28,7 +28,7 @@
               label="Enter Channel Name"
               outlined
               dense
-              class="mt-0"
+              class="mt-2"
             />
           </div>
 
@@ -84,7 +84,7 @@
               label="Enter Description"
               outlined
               dense
-              class="mt-0"
+              class="mt-2"
               multi-line
             />
           </div>
@@ -93,8 +93,8 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="red" text>cancel</v-btn>
-        <v-btn color="success" >Create</v-btn>
+        <v-btn color="red" @click.stop="dialog = false" text>cancel</v-btn>
+        <v-btn color="success">Create</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
