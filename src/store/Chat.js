@@ -18,6 +18,10 @@ const ChatStore = {
             state.chat.messages = messages;
         },
 
+        addChatMessage(state , message) {
+            state.chat.messages.push(message);
+        },
+
         setChatUsers(state , users) {
             state.chat.users = users;
         },

@@ -26,6 +26,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    ChatStore,
+    chat : ChatStore,
   }
 })

@@ -42,10 +42,26 @@ export default {
 
   created() {
     console.log('chat mounted');
-    this.$store.state.socket.emit("channel:join:main");
-    this.$store.state.socket.on("channel:message:main", (data) => {
+    this.$store.state.socket.emit("channel:main:join");
+
+    this.$store.state.socket.on("channel:main:meJoined", (data) => {
       console.log("you have been connected to the main chat channel!" , data);
+      this.$store.commit('setChatActiveProfile' , {
+        id: -1,
+        name: 'Main Chat',
+        avatar: 'Icon'
+      })
     });
+
+
+    this.$store.state.socket.on('channel:main:userJoined' , (data) => {
+      console.log("user joined main channel!" , data);
+    });
+
+    this.$store.state.socket.on('channel:main:userLeft' , (data) => {
+      console.log("user left" , data);
+    });
+
   },
 
   methods: {
