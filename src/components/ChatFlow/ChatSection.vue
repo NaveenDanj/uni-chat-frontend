@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="contentMain">
+      <div class="contentMain" ref="scrollSection">
 
         <div v-for="(item , index) in messagesArray" :key="index" style="width : 100%;">
 
@@ -93,6 +93,8 @@
           dark
           outlined
           class="my-auto"
+          @keydown.enter="handleSendMessage"
+          @click="scrollToElement"
         />
 
         <div class="d-flex ml-3 my-auto">
@@ -109,6 +111,8 @@
 
 <script>
 import ProfileDetail from "./ProfileDetail.vue";
+import moment from "moment";
+
 export default {
   components: { ProfileDetail },
 
@@ -117,6 +121,10 @@ export default {
       drawer: false,
       message : '',
     };
+  },
+
+  updated(){
+    this.scrollToElement();
   },
 
   computed : {
@@ -168,7 +176,18 @@ export default {
         this.message = '';
       }
 
+    },
+
+    formatDate(date){
+      return moment(date).format('MMM Do YYYY, h:mm a');
+    },
+
+    scrollToElement() {
+      const el = this.$refs.scrollSection;
+      el.scrollTop = el.scrollHeight;
     }
+
+
   }
 
 };
