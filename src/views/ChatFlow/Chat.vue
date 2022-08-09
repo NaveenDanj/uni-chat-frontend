@@ -77,12 +77,13 @@
 
     <div>
         <div class="d-flex justify-space-between">
+
             <label class="my-auto" style="font-size : 10px;">CHANNELS</label>
+
             <div class="my-auto">
-                <v-btn color="success" fab outlined text x-small>
-                    <v-icon color="success">mdi-plus</v-icon>
-                </v-btn>
+              <CreateChannel />
             </div>
+
         </div>
         <v-list dense dark color="#262626">
           <v-list-item
@@ -108,17 +109,19 @@
 </template>
 
 <script>
+import CreateChannel from '../../components/Dialogs/CreateChannel.vue';
 export default {
     data() {
-    return {
-      drawer: true,
-      items: [
-        { title: "Bella Cote" },
-        { title: "Steven Jury"},
-        { title: "James Pinard"},
-        { title: "Alissa Richards"},
-      ],
-    };
-  },
+        return {
+            drawer: true,
+            items: [
+                { title: "Bella Cote" },
+                { title: "Steven Jury" },
+                { title: "James Pinard" },
+                { title: "Alissa Richards" },
+            ],
+        };
+    },
+    components: { CreateChannel }
 }
 </script>

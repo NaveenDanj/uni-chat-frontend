@@ -53,12 +53,13 @@
             v-else
             :item="item"
           />
-          
+
         </div>
 
       </div>
 
       <div class="footer">
+
         <v-text-field
           v-model="message"
           label="Type a message..."
@@ -77,7 +78,9 @@
             <v-icon>mdi-send</v-icon>
           </v-btn>
         </div>
+
       </div>
+
     </div>
 
     <ProfileDetail :drawer="drawer" @drawClose="drawer = false" />
@@ -173,7 +176,6 @@ export default {
 
     formatDate(date){
 
-      // if date is today then return time
       if(moment(date).isSame(moment(), 'day')){
         return moment(date).format('h:mm a');
       }
