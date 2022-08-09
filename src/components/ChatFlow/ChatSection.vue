@@ -49,25 +49,11 @@
             :item="item"
           />
 
+          <CurrentUserChatComponent
+            v-else
+            :item="item"
+          />
           
-
-          <div v-else class="mt-2" style="max-width: 80%; min-width: 20%; float: right">
-            <div
-              class="pa-3 ml-10"
-              style="background-color: rgba(53, 75, 60, 0.5)"
-            >
-              <p>
-                {{ item.message }}
-              </p>
-            </div>
-
-            <div class="d-flex mt-3" style="float: right">
-              <!-- read receipt icon -->
-              <v-icon small style="color: #4eac6d">mdi-check-circle</v-icon>
-              <label style="font-size: 12px" class="ml-2">{{ formatDate(item.meta.date) }}</label>
-            </div>
-          </div>
-
         </div>
 
       </div>
@@ -102,9 +88,10 @@
 import ProfileDetail from "./ProfileDetail.vue";
 import moment from "moment";
 import OtherUserChatComponent from "../ChatComponents/OtherUserChatComponent.vue";
+import CurrentUserChatComponent from "../ChatComponents/CurrentUserChatComponent.vue";
 
 export default {
-  components: { ProfileDetail, OtherUserChatComponent },
+  components: { ProfileDetail, OtherUserChatComponent, CurrentUserChatComponent },
 
   data() {
     return {

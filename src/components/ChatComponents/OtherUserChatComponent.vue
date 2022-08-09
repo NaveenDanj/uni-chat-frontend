@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="mt-2"
-    style="max-width: 80%; min-width: 20%"
-  >
+  <div class="mt-2" style="max-width: 80%; min-width: 20%">
     <div class="pa-3 ml-10" style="background-color: #383838">
       <p>
         {{ item.message }}
@@ -24,7 +21,20 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
-    props : ['item']
+  props: ["item"],
+
+  methods: {
+    formatDate(date) {
+      // if date is today then return time
+      if (moment(date).isSame(moment(), "day")) {
+        return moment(date).format("h:mm a");
+      } else {
+        return moment(date).format("MMM DD");
+      }
+    },
+  },
 };
 </script>
