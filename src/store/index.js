@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import ChatStore from './Chat'
+import ChatStore from './Chat';
+import ContactStore from './Contact';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+
   state: {
     currentUser : null,
     socket : null,
@@ -27,5 +29,7 @@ export default new Vuex.Store({
   },
   modules: {
     chat : ChatStore,
+    contact : ContactStore
   }
-})
+
+});
