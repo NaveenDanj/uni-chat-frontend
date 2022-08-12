@@ -23,53 +23,13 @@
     </div>
 
     <!-- favourites -->
-    <div>
-        <label style="font-size : 10px;">FAVOURITES</label>
-        <v-list dense dark color="#262626">
-          <v-list-item
-            v-for="(item,index) in items"
-            :key="index"
-            dense
-            link
-            style="font-size: 10px;"
-            @click="$emit('chatSelect',item.id)"
-          >
-            <v-list-item-avatar size="30px">
-              <img src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg" />
-            </v-list-item-avatar>
-    
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-    </div>
+    <FavouriteList
+      :items="[]"
+    />
 
-    <div>
-        <div class="d-flex justify-space-between">
-            <label class="my-auto" style="font-size : 10px;">DIRECT MESSAGES</label>
-            <div class="my-auto">
-              <DirectContact />
-            </div>
-        </div>
-        <v-list dense dark color="#262626">
-          <v-list-item
-            v-for="(item,index) in items"
-            :key="index"
-            dense
-            link
-            style="font-size: 10px;"
-          >
-            <v-list-item-avatar size="30px">
-              <img src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg" />
-            </v-list-item-avatar>
-    
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-    </div>
+    <DirectContact
+      :items="[]"
+    />
 
     <div>
         <div class="d-flex justify-space-between">
@@ -108,6 +68,8 @@
 import CreateChannel from '../../components/Dialogs/CreateChannel.vue';
 import AddContact from '../../components/Dialogs/AddContact.vue';
 import DirectContact from '../../components/Dialogs/DirectContact.vue';
+import FavouriteList from '../../components/SideSection/FavouriteList.vue';
+import DirectContact from '../../components/Dialogs/DirectContact.vue';
 export default {
     data() {
         return {
@@ -120,6 +82,6 @@ export default {
             ],
         };
     },
-    components: { CreateChannel, AddContact, DirectContact }
+    components: { CreateChannel, AddContact, DirectContact, FavouriteList, DirectContact }
 }
 </script>
