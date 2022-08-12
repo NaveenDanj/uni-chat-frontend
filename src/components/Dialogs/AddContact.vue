@@ -31,6 +31,16 @@
             />
           </div>
 
+          <div>
+            <label style="font-weight: bold">Prefered Name</label>
+            <v-text-field
+              label="Prefered Name"
+              outlined
+              dense
+              class="mt-2"
+            />
+          </div>
+
         </v-form>
       
       </v-card-text>
