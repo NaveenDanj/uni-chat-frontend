@@ -24,15 +24,32 @@
 
     <!-- favourites -->
     <FavouriteList
-      :items="[]"
+      :items="[1]"
     />
 
-    <DirectContact
-      :items="[]"
+    <div class="d-flex justify-space-between">
+        <label class="my-auto" style="font-size : 10px;">DIRECT MESSAGES</label>
+        <div class="my-auto">
+          <DirectContact />
+        </div>
+    </div>
+
+    <DirectContactList
+      :items="[1]"
     />
+
+    <div class="d-flex justify-space-between">
+
+      <label class="my-auto" style="font-size : 10px;">CHANNELS</label>
+
+      <div class="my-auto">
+        <CreateChannel />
+      </div>
+
+    </div>
 
     <ChannelList
-      :items="[]"
+      :items="[1]"
     />
 
   </div>
@@ -43,20 +60,14 @@ import CreateChannel from '../../components/Dialogs/CreateChannel.vue';
 import AddContact from '../../components/Dialogs/AddContact.vue';
 import DirectContact from '../../components/Dialogs/DirectContact.vue';
 import FavouriteList from '../../components/SideSection/FavouriteList.vue';
-import DirectContact from '../../components/Dialogs/DirectContact.vue';
 import ChannelList from '../../components/SideSection/ChannelList.vue';
+import DirectContactList from '../../components/SideSection/DirectContactList.vue';
 export default {
-    data() {
-        return {
-            drawer: true,
-            items: [
-                { title: "Bella Cote" },
-                { title: "Steven Jury" },
-                { title: "James Pinard" },
-                { title: "Alissa Richards" },
-            ],
-        };
-    },
-    components: { CreateChannel, AddContact, DirectContact, FavouriteList, DirectContact, ChannelList }
+  data() {
+    return {
+      drawer: true
+    };
+  },
+  components: { CreateChannel, AddContact, DirectContact, FavouriteList, ChannelList, DirectContactList }
 }
 </script>

@@ -1,11 +1,5 @@
 <template>
     <div>
-        <div class="d-flex justify-space-between">
-            <label class="my-auto" style="font-size : 10px;">DIRECT MESSAGES</label>
-            <div class="my-auto">
-              <DirectContact />
-            </div>
-        </div>
         <v-list dense dark color="#262626">
           <v-list-item
             v-for="(item,index) in items"

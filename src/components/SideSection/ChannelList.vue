@@ -1,14 +1,5 @@
 <template>
     <div>
-        <div class="d-flex justify-space-between">
-
-            <label class="my-auto" style="font-size : 10px;">CHANNELS</label>
-
-            <div class="my-auto">
-              <CreateChannel />
-            </div>
-
-        </div>
         <v-list dense dark color="#262626">
           <v-list-item
             v-for="(item,index) in items"
