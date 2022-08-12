@@ -31,35 +31,9 @@
       :items="[]"
     />
 
-    <div>
-        <div class="d-flex justify-space-between">
-
-            <label class="my-auto" style="font-size : 10px;">CHANNELS</label>
-
-            <div class="my-auto">
-              <CreateChannel />
-            </div>
-
-        </div>
-        <v-list dense dark color="#262626">
-          <v-list-item
-            v-for="(item,index) in items"
-            :key="index"
-            dense
-            link
-            style="font-size: 10px;"
-          >
-            <v-list-item-avatar size="30px">
-              <v-icon>mdi-pound</v-icon>
-
-            </v-list-item-avatar>
-    
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-    </div>  
+    <ChannelList
+      :items="[]"
+    />
 
   </div>
 </template>
@@ -70,6 +44,7 @@ import AddContact from '../../components/Dialogs/AddContact.vue';
 import DirectContact from '../../components/Dialogs/DirectContact.vue';
 import FavouriteList from '../../components/SideSection/FavouriteList.vue';
 import DirectContact from '../../components/Dialogs/DirectContact.vue';
+import ChannelList from '../../components/SideSection/ChannelList.vue';
 export default {
     data() {
         return {
@@ -82,6 +57,6 @@ export default {
             ],
         };
     },
-    components: { CreateChannel, AddContact, DirectContact, FavouriteList, DirectContact }
+    components: { CreateChannel, AddContact, DirectContact, FavouriteList, DirectContact, ChannelList }
 }
 </script>
