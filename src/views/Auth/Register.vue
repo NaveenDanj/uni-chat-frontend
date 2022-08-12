@@ -163,7 +163,7 @@ export default {
 
                 this.$store.commit('setCurrentUser' , res.data.user );
                 localStorage.setItem('token' , res.data.token);
-                const socket = io("http://localhost:3030");
+                const socket = io(process.env.VUE_APP_SOCKET_URL);
                 socket.userId = res.data.user.userId;
                 socket.userInstance = res.data.user;
                 this.$store.commit('setSocket' , socket);

@@ -8,7 +8,9 @@
             <v-col cols="12" md="6" style="background-color : #080E15">
 
                 <div class="formContainer">
+
                     <v-form @submit="handleLogin" ref="loginForm">
+
                         <center><h1>Sign in</h1>
                         <label>Enter your email address and password to access admin panel.</label>
                         </center>
@@ -65,6 +67,7 @@
 
 
                     </v-form>
+
                 </div>
 
             </v-col>
@@ -111,6 +114,7 @@ export default {
     methods : {
 
         async handleLogin(e){
+
             e.preventDefault();
             console.log('login');
 
@@ -130,7 +134,7 @@ export default {
                 this.$store.commit('setCurrentUser' , res.data.user);
                 localStorage.setItem('token' , res.data.token);
 
-                const socket = io("http://localhost:3030");
+                const socket = io(process.env.VUE_APP_SOCKET_URL);
                 socket.userId = res.data.user.userId;
                 socket.userInstance = res.data.user;
                 this.$store.commit('setSocket' , socket);

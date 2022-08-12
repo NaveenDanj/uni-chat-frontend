@@ -31,7 +31,7 @@ async function mountApp(){
     let user = await Auth.getCurrentUser();
     store.commit('setCurrentUser' , user.data.user);
 
-    const socket = io("http://localhost:3030");
+    const socket = io(process.env.VUE_APP_SOCKET_URL);
     socket.userId = user.data.user.userId;
     socket.userInstance = user.data.user;
     store.commit('setSocket' , socket);
