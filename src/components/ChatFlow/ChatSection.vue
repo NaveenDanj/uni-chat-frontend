@@ -1,8 +1,11 @@
 <template>
   <div class="main">
     <div style="width: 100%">
-      <div class="header d-flex justify-space-between">
+
+      <div v-if="activeProfile != null" class="header d-flex justify-space-between">
+
         <div class="d-flex my-auto">
+
           <div class="my-auto mr-2 backBtn">
             <v-btn @click="() => $emit('backEvent')" icon dark small>
               <v-icon>mdi-arrow-left-circle</v-icon>
@@ -11,16 +14,16 @@
 
           <v-avatar @click="drawer = true" size="40px" class="my-auto">
             <img
-              v-if="activeProfile != null && activeProfile.avatar != 'Icon' "
-              src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg"
+              v-if="activeProfile != undefined && activeProfile.user.profile_image != 'Icon' "
+              :src="profileImage(activeProfile)"
             />
 
-            <v-icon class="white--text">mdi-pound</v-icon>
+            <v-icon v-else class="white--text">mdi-pound</v-icon>
 
           </v-avatar>
 
           <div class="my-auto ml-3">
-            <label @click="drawer = true">{{ activeProfile != null ? activeProfile.name : '' }}</label><br />
+            <label @click="drawer = true">{{ activeProfile != null ? activeProfile.contact_name : '' }}</label><br />
             <label style="font-size: 11px">Online</label>
           </div>
         </div>
@@ -40,7 +43,7 @@
         </div>
       </div>
 
-      <div class="contentMain" ref="scrollSection">
+      <div v-if="activeProfile != null" class="contentMain" ref="scrollSection">
 
         <div v-for="(item , index) in messagesArray" :key="index" style="width : 100%;">
 
@@ -58,7 +61,7 @@
 
       </div>
 
-      <div class="footer">
+      <div v-if="activeProfile != null" class="footer">
 
         <v-text-field
           v-model="message"
@@ -78,6 +81,10 @@
             <v-icon>mdi-send</v-icon>
           </v-btn>
         </div>
+
+      </div>
+
+      <div v-if="activeProfile == null" class="contentMain" style="height : 100%">
 
       </div>
 
@@ -119,7 +126,7 @@ export default {
 
     currentUser(){
       return this.$store.state.currentUser;
-    }
+    },
 
   },
 
@@ -145,6 +152,7 @@ export default {
   },
 
   methods : {
+
     handleSendMessage(){
 
       if(this.message != ''){
@@ -188,8 +196,11 @@ export default {
     scrollToElement() {
       const el = this.$refs.scrollSection;
       el.scrollTop = el.scrollHeight;
-    }
+    },
 
+    profileImage(item){
+      return process.env.VUE_APP_SOCKET_URL + item.user.profile_image
+    }
 
   }
 
