@@ -48,7 +48,7 @@
         <div v-for="(item , index) in messagesArray" :key="index" style="width : 100%;">
 
           <OtherUserChatComponent
-            v-if="item.userData.id != currentUser.id"
+            v-if="item.user_from.id != currentUser.id"
             :item="item"
           />
 
@@ -157,27 +157,26 @@ export default {
 
       if(this.message != ''){
         
-        this.$store.state.socket.emit("chennel:main:sendMessage" , {
-          message : this.message,
-          profile : this.activeProfile,
-          meta : {
-            date : new Date(),
-          },
-          userData : this.$store.state.currentUser
+        this.$store.state.socket.emit("private:sendMessage" , {
+          message: this.message,
+          user_from: this.$store.state.currentUser,
+          user_to: this.activeProfile,
+          date : new Date(),
+          room_id: this.activeProfile.room_id
         });
 
         // add to store
         this.$store.commit('addChatMessage' , {
-          message : this.message,
-          profile : this.activeProfile,
-          meta : {
-            date : new Date(),
-          },
-          userData : this.$store.state.currentUser,
+          message: this.message,
+          user_from: this.$store.state.currentUser,
+          user_to: this.activeProfile,
+          date : new Date(),
+          room_id: this.activeProfile.room_id,
           id : Date.now()+'' + this.$store.state.socket.id
         });
 
         this.message = '';
+
       }
 
     },
