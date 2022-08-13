@@ -41,6 +41,7 @@ export default {
     handleSetActiveChat(item){
       this.$store.commit('setChatActiveProfile' , item);      
       this.$store.state.socket.emit('private:join' , item);
+      this.$store.commit('setChatMessages' , []);
     }
 
   },

@@ -132,8 +132,7 @@ export default {
 
   created(){
 
-    this.$store.state.socket.on('channel:main:receiveMessage' , (data) => {
-
+    this.$store.state.socket.on('private:receiveMessage' , (data) => {
       let check = false;    
       for(let i = 0; i < this.$store.state.chat.chat.messages.length; i++){
         let msgObj = this.$store.state.chat.chat.messages[i];
