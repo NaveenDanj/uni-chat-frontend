@@ -7,16 +7,24 @@ const ContactStore = {
 
     mutations: {
 
-        setDirectContacts(state , directContacts) {
-            state.directContacts = directContacts;
+        addDirectContact(state , directContact) {
+            state.directContacts.push(directContact);
         },
 
-        setFavoriteContacts(state , favoriteContacts) {
-            state.favoriteContacts = favoriteContacts;
+        resetDirectContacts(state) {
+            state.directContacts = [];
         },
 
-        setChannels(state , channels) {
-            state.channels = channels;
+        addFavoriteContact(state , favoriteContact) {
+            state.favoriteContacts.push(favoriteContact);
+        },
+
+        resetFavoriteContacts(state) {
+            state.favoriteContacts = [];
+        },
+
+        addChannel(state , channel) {
+            state.channels.push(channel);
         }
 
     }

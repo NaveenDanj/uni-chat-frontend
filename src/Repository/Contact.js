@@ -14,7 +14,7 @@ export default {
 
     },
 
-    async getAllContacts(form){
+    async getAllContacts(){
             
         return api.get('/contact/get_current_user_contact' , {
             headers: {
