@@ -43,12 +43,12 @@
         </div>
       </div>
 
-      <div v-if="activeProfile != null" class="contentMain" ref="scrollSection">
+      <div v-if="activeProfile != null" class="contentMain" ref="scrollSection" @scroll="handleScroll">
 
         <div v-for="(item , index) in messagesArray" :key="index" style="width : 100%;">
 
           <OtherUserChatComponent
-            v-if="item.user_from.id != currentUser.id"
+            v-if="item.from_user_id != currentUser.id"
             :item="item"
           />
 
@@ -100,6 +100,8 @@ import moment from "moment";
 import OtherUserChatComponent from "../ChatComponents/OtherUserChatComponent.vue";
 import CurrentUserChatComponent from "../ChatComponents/CurrentUserChatComponent.vue";
 
+import Chat from '../../Repository/Chat';
+
 export default {
   components: { ProfileDetail, OtherUserChatComponent, CurrentUserChatComponent },
 
@@ -107,11 +109,22 @@ export default {
     return {
       drawer: false,
       message : '',
+
+      limit : 15,
+      currentChatPage : 1,
     };
   },
 
   updated(){
-    this.scrollToElement();
+    const el = this.$refs.scrollSection;
+    console.log(el.scrollTop  , this.currentChatPage)
+    if(el.scrollTop == 0  && this.currentChatPage == 1){
+      console.log('was here!')
+      this.scrollToElement();
+    }else if(el.scrollTop != 0){
+      this.scrollToElement();
+    }
+
   },
 
   computed : {
@@ -126,6 +139,18 @@ export default {
 
     currentUser(){
       return this.$store.state.currentUser;
+    },
+
+  },
+
+  watch : {
+
+    activeProfile(newValue){
+      console.log('changed!');
+      if(newValue != null){
+        this.currentChatPage = 1;
+        this.scrollToElement();
+      }
     },
 
   },
@@ -169,6 +194,7 @@ export default {
           message: this.message,
           user_from: this.$store.state.currentUser,
           user_to: this.activeProfile,
+          from_user_id : this.$store.state.currentUser.id,
           date : new Date(),
           room_id: this.activeProfile.room_id,
           id : Date.now()+'' + this.$store.state.socket.id
@@ -193,7 +219,41 @@ export default {
 
     scrollToElement() {
       const el = this.$refs.scrollSection;
-      el.scrollTop = el.scrollHeight;
+      if(el){
+        el.scrollTop = el.scrollHeight;
+      }
+    },
+
+    async loadNextPage(){
+      const el = this.$refs.scrollSection;
+      if(el.scrollTop == 0){
+
+        try{
+          let messages = await Chat.loadUserChats(this.activeProfile.contact_id ,  this.activeProfile.room_id , this.currentChatPage);
+          
+          let reversed =  messages.data.messages;
+          
+          for (let i = 0; i < reversed.length; i++) {
+            this.$store.commit('prependChatMessage' , reversed[i]);
+          }
+        
+          if (reversed.length > 0){
+            this.currentChatPage++;
+          }
+
+        }catch(err){
+          console.log(err);
+        }
+      }
+
+    },
+
+    handleScroll(){
+      const el = this.$refs.scrollSection;
+      if(el.scrollTop == 0){
+        console.log('top')
+        this.loadNextPage();
+      }
     },
 
     profileImage(item){

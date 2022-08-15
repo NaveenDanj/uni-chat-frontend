@@ -23,6 +23,9 @@
 </template>
 
 <script>
+
+import Chat from '../../Repository/Chat';
+
 export default {
   props: ["items"],
 
@@ -38,10 +41,20 @@ export default {
       return process.env.VUE_APP_SOCKET_URL + item.user.profile_image;
     },
 
-    handleSetActiveChat(item){
+    async handleSetActiveChat(item){
       this.$store.commit('setChatActiveProfile' , item);      
       this.$store.state.socket.emit('private:join' , item);
       this.$store.commit('setChatMessages' , []);
+
+      // load the previous messages
+      try{
+        let messages = await Chat.loadUserChats(item.contact_id ,  item.room_id , 1);
+        this.$store.commit('setChatMessages' , messages.data.messages.reverse());
+        console.log(messages);
+      }catch(err){
+        console.log(err);
+      }
+
     }
 
   },

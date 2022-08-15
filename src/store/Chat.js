@@ -22,6 +22,11 @@ const ChatStore = {
             state.chat.messages.push(message);
         },
 
+        // add chat to start of array
+        prependChatMessage(state , message) {
+            state.chat.messages.unshift(message);
+        },
+
         setChatUsers(state , users) {
             state.chat.users = users;
         },
