@@ -14,7 +14,7 @@
       </v-avatar>
 
       <label class="my-auto ml-2" style="font-size: 12px">{{
-        formatDate(item.date)
+        formatDate(item.createdAt)
       }}</label>
     </div>
   </div>

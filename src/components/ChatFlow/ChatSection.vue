@@ -109,17 +109,13 @@ export default {
     return {
       drawer: false,
       message : '',
-
-      limit : 15,
       currentChatPage : 1,
     };
   },
 
   updated(){
     const el = this.$refs.scrollSection;
-    console.log(el.scrollTop  , this.currentChatPage)
     if(el.scrollTop == 0  && this.currentChatPage == 1){
-      console.log('was here!')
       this.scrollToElement();
     }else if(el.scrollTop != 0){
       this.scrollToElement();
@@ -146,7 +142,6 @@ export default {
   watch : {
 
     activeProfile(newValue){
-      console.log('changed!');
       if(newValue != null){
         this.currentChatPage = 1;
         this.scrollToElement();
@@ -229,6 +224,11 @@ export default {
       if(el.scrollTop == 0){
 
         try{
+
+          if(this.currentChatPage == 1){
+            this.currentChatPage = 2;
+          }
+
           let messages = await Chat.loadUserChats(this.activeProfile.contact_id ,  this.activeProfile.room_id , this.currentChatPage);
           
           let reversed =  messages.data.messages;

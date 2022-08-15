@@ -12,7 +12,7 @@
       <!-- read receipt icon -->
       <v-icon small style="color: #4eac6d">mdi-check-circle</v-icon>
       <label style="font-size: 12px" class="ml-2">{{
-        formatDate(item.date)
+        formatDate(item.createdAt)
       }}</label>
     </div>
 
