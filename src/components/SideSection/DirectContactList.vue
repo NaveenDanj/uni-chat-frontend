@@ -59,7 +59,6 @@ export default {
       try{
         let messages = await Chat.loadUserChats(item.contact_id ,  item.room_id , 1);
         this.$store.commit('setChatMessages' , messages.data.messages.reverse());
-        console.log(messages);
       }catch(err){
         console.log(err);
       }

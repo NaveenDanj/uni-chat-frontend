@@ -7,7 +7,8 @@
     right
     width="320"
   >
-    <div class="pa-4" style="color: #adb5bd">
+
+    <div v-if="activeProfile != null" class="pa-4" style="color: #adb5bd">
       <div
         style="
           width: 100%;
@@ -18,7 +19,7 @@
         class="pa-2"
       >
         <div class="d-flex justify-space-between">
-          <h3 class="my-auto">My Profile</h3>
+          <h3 class="my-auto">{{ activeProfile.contact_name }}'s Account</h3>
           <v-btn
             @click="showDraw = false"
             class="my-auto"
@@ -46,8 +47,8 @@
         </div>
         <div class="mt-1">
           <center>
-            <h3>Adam Zampa</h3>
-            <label>Front end Developer</label>
+            <h3>{{ fullname }}</h3>
+            <label>{{ designation }}</label>
           </center>
         </div>
       </div>
@@ -86,15 +87,14 @@
             <v-divider class="pa-0" dark />
 
             <p class="mt-3">
-              If several languages coalesce, the grammar of the resulting
-              language is more simple.
+              {{about}}
             </p>
 
             <div>
               <div class="d-flex">
                 <v-icon small class="my-auto" dark>mdi-account</v-icon>
                 <label class="ml-5 my-auto" style="font-size: 13px"
-                  >Adam Zampa</label
+                  >{{ fullname }}</label
                 >
               </div>
               <div class="d-flex mt-2">
@@ -102,16 +102,17 @@
                   >mdi-message-reply-text-outline</v-icon
                 >
                 <label class="ml-5 my-auto" style="font-size: 13px"
-                  >adc@123.com</label
+                  >{{ email }}</label
                 >
               </div>
               <div class="d-flex mt-2">
                 <v-icon small class="my-auto" dark>mdi-map-marker</v-icon>
                 <label class="ml-5 my-auto" style="font-size: 13px"
-                  >California, USA</label
+                  >{{ location }}</label
                 >
               </div>
             </div>
+
           </div>
 
           <v-divider class="pa-0" dark />
@@ -236,6 +237,7 @@
         </div>
       </div>
     </div>
+
   </v-navigation-drawer>
 </template>
 
@@ -277,5 +279,70 @@ export default {
       ],
     };
   },
+
+  computed : {
+    
+    activeProfile(){
+      return this.$store.state.chat.chat.activeProfile;
+    },
+
+    fullname(){
+
+      if(!this.$store.state.chat.chat.activeProfile){
+        return 'loading...'
+      }
+
+      return this.$store.state.chat.chat.activeProfile.user.fullname
+    },
+
+    designation(){
+
+      if(!this.$store.state.chat.chat.activeProfile){
+        return 'loading...'
+      }
+
+      return this.$store.state.chat.chat.activeProfile.user.designation || 'No designation'
+    },
+
+    about(){
+
+      if(!this.$store.state.chat.chat.activeProfile){
+        return 'loading...'
+      }
+
+      return this.$store.state.chat.chat.activeProfile.user.about || 'No description'
+    },
+
+    email(){
+
+      if(!this.$store.state.chat.chat.activeProfile){
+        return 'loading...'
+      }
+
+      return this.$store.state.chat.chat.activeProfile.user.email
+    },
+
+    location(){
+
+      if(!this.$store.state.chat.chat.activeProfile){
+        return 'loading...'
+      }
+
+      return this.$store.state.chat.chat.activeProfile.user.location || 'No location'
+    },
+
+    userId(){
+
+      if(!this.$store.state.chat.chat.activeProfile){
+        return 'loading...'
+      }
+
+      return this.$store.state.chat.chat.activeProfile.user.userId
+    }
+
+
+  },
+
+
 };
 </script>

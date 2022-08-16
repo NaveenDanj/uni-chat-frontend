@@ -255,7 +255,6 @@ export default {
     handleScroll(){
       const el = this.$refs.scrollSection;
       if(el.scrollTop == 0){
-        console.log('top')
         this.loadNextPage();
       }
     },
