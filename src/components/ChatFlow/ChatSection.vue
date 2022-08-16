@@ -24,7 +24,7 @@
 
           <div class="my-auto ml-3">
             <label @click="drawer = true">{{ activeProfile != null ? activeProfile.contact_name : '' }}</label><br />
-            <label style="font-size: 11px">Online</label>
+            <label style="font-size: 11px">{{ activeProfileOnlineStatus }}</label>
           </div>
         </div>
 
@@ -136,6 +136,10 @@ export default {
     currentUser(){
       return this.$store.state.currentUser;
     },
+
+    activeProfileOnlineStatus(){
+      return this.activeProfile.user.is_online == 0 ? 'Offline' : 'Online'
+    }
 
   },
 

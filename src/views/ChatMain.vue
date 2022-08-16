@@ -42,24 +42,27 @@ export default {
 
   created() {
     console.log('chat mounted');
-    this.$store.state.socket.emit("channel:main:join");
+    this.$store.state.socket.emit("channel:main:join" , this.$store.state.currentUser);
 
     this.$store.state.socket.on("channel:main:meJoined", (data) => {
       console.log("you have been connected to the main chat channel!" , data);
-      // this.$store.commit('setChatActiveProfile' , {
-      //   id: -1,
-      //   contact_name: 'Main Chat',
-      //   profile_image: 'Icon'
-      // })
     });
 
 
     this.$store.state.socket.on('channel:main:userJoined' , (data) => {
       console.log("user joined main channel!" , data);
+      this.$store.commit('setContactOnlineStatus' , {
+        id : data.userId,
+        is_online : 1
+      })
     });
 
     this.$store.state.socket.on('channel:main:userLeft' , (data) => {
       console.log("user left" , data);
+      this.$store.commit('setContactOnlineStatus' , {
+        id : data.userId,
+        is_online : 0
+      })
     });
 
   },

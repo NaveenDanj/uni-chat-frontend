@@ -42,6 +42,15 @@ export default {
     },
 
     async handleSetActiveChat(item){
+
+      if(this.$store.state.chat.chat.activeProfile){
+        
+        if(this.$store.state.chat.chat.activeProfile.user.id == item.user.id){
+          return;
+        }
+
+      }
+
       this.$store.commit('setChatActiveProfile' , item);      
       this.$store.state.socket.emit('private:join' , item);
       this.$store.commit('setChatMessages' , []);

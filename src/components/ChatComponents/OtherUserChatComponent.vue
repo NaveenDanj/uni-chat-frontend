@@ -9,7 +9,7 @@
     <div class="mt-2 d-flex">
       <v-avatar size="30px" class="my-auto">
         <img
-          src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg"
+          :src="profileImage()"
         />
       </v-avatar>
 
@@ -27,6 +27,7 @@ export default {
   props: ["item"],
 
   methods: {
+    
     formatDate(date) {
       // if date is today then return time
       if (moment(date).isSame(moment(), "day")) {
@@ -35,6 +36,12 @@ export default {
         return moment(date).format("MMM DD");
       }
     },
+
+    profileImage(){
+      return process.env.VUE_APP_SOCKET_URL + this.$store.state.chat.chat.activeProfile.user.profile_image;
+    }
+
+
   },
 };
 </script>
