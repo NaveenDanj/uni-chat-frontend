@@ -262,21 +262,6 @@ export default {
   data() {
     return {
       showDraw: false,
-      items: [
-        {
-          title: "Profile",
-          icon: "mdi-face-man-profile",
-          link: "/app/profile",
-        },
-        { title: "Chat", icon: "mdi-forum", link: "/app/chat" },
-        { title: "Contacts", icon: "mdi-contacts", link: "/app/contacts" },
-        {
-          title: "Bookmark",
-          icon: "mdi-bookmark-multiple",
-          link: "/app/bookmark",
-        },
-        { title: "Settings", icon: "mdi-cog-outline", link: "/app/settings" },
-      ],
     };
   },
 
@@ -346,6 +331,10 @@ export default {
 
 
   },
+
+  methods : {
+
+  }
 
 
 };

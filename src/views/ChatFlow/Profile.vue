@@ -22,9 +22,11 @@
         <v-avatar
           size="80px"
           class="mx-auto"
-          style="margin-top: -50px; border: 1px solid gray"
+          style="margin-top: -50px; border: 1px solid gray; cursor: pointer;"
         >
+          <input type="file" hidden ref="propicker" accept="image/*" @change="handleUploadProPic" />
           <img
+            @click="handleOpenFileDialog"
             src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg"
           />
         </v-avatar>
@@ -148,9 +150,28 @@
 </template> 
 
 <script>
+
+import Auth from '../../Repository/Auth';
+
 export default {
   
   methods : {
+
+    handleOpenFileDialog(){
+      let elem = this.$refs.propicker;
+      elem.click();
+    },
+
+    async handleUploadProPic(event){
+      console.log(event.target.files);
+
+      const formData = new FormData();
+      formData.append('avatar' , event.target.files[0]);
+
+      let res = await Auth.uploadProPic(formData);
+      console.log("res " , res);
+
+    },
 
     fullname(){
 

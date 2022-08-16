@@ -46,6 +46,15 @@ export default {
             }
         });
 
+    },
+
+    async uploadProPic(form){
+        return api.post('/user/upload-profile-picture' , form , {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     }
 
 }
