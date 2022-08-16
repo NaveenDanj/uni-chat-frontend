@@ -41,7 +41,7 @@
             style="margin-top: -50px; border: 1px solid gray"
           >
             <img
-              src="https://themesbrand.com/doot/layouts/assets/images/users/avatar-2.jpg"
+              :src="profileImage"
             />
           </v-avatar>
         </div>
@@ -338,6 +338,10 @@ export default {
       }
 
       return this.$store.state.chat.chat.activeProfile.user.userId
+    },
+
+    profileImage(){
+      return process.env.VUE_APP_SOCKET_URL + this.$store.state.chat.chat.activeProfile.user.profile_image;
     }
 
 
