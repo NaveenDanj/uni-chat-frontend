@@ -28,11 +28,11 @@
 
     <!-- favourites -->
     <FavouriteList
-      v-if="$store.state.contact.favoriteContacts.length > 0"
+      v-if="favouriteList.length > 0"
       :favouriteList="favouriteList"
     />
 
-    <div v-if="$store.state.contact.directContacts.length > 0" class="d-flex justify-space-between">
+    <div v-if="directContactList.length > 0" class="d-flex justify-space-between">
         <label class="my-auto" style="font-size : 10px;">DIRECT MESSAGES</label>
         <div class="my-auto">
           <DirectContact />
@@ -40,7 +40,7 @@
     </div>
 
     <DirectContactList 
-      v-if="$store.state.contact.directContacts.length > 0"
+      v-if="directContactList.length > 0"
       :directContactList="directContactList"
     />
 
@@ -76,13 +76,14 @@ export default {
   data() {
     return {
       drawer: true,
-      favouriteList : this.$store.state.contact.favoriteContacts,
-      directContactList : this.$store.state.contact.directContacts,
+      favouriteList : [],
+      directContactList : [],
       searchString : "",
     };
   },
 
   created(){
+    console.log('this load!');
     this.loadContacts();
   },
 
@@ -107,6 +108,8 @@ export default {
 
       }
 
+      this.favouriteList = this.$store.state.contact.favoriteContacts;
+      this.directContactList = this.$store.state.contact.directContacts;
 
     },
 
