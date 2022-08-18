@@ -2,7 +2,7 @@
   <div>
     <v-list dense dark color="#262626">
       <v-list-item
-        v-for="(item, index) in $store.state.contact.directContacts"
+        v-for="(item, index) in directContactList"
         :key="index"
         dense
         link
@@ -27,7 +27,7 @@
 import Chat from '../../Repository/Chat';
 
 export default {
-  props: ["items"],
+  props: ["directContactList"],
 
   created(){
     this.$store.state.socket.on('private:joined' , (payload) => {

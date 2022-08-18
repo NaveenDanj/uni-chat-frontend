@@ -21,11 +21,16 @@
         dense
         dark
         block
+        @input="handleSearch"
+        v-model="searchString"
       />
     </div>
 
     <!-- favourites -->
-    <FavouriteList v-if="$store.state.contact.favoriteContacts.length > 0" />
+    <FavouriteList
+      v-if="$store.state.contact.favoriteContacts.length > 0"
+      :favouriteList="favouriteList"
+    />
 
     <div v-if="$store.state.contact.directContacts.length > 0" class="d-flex justify-space-between">
         <label class="my-auto" style="font-size : 10px;">DIRECT MESSAGES</label>
@@ -34,7 +39,10 @@
         </div>
     </div>
 
-    <DirectContactList v-if="$store.state.contact.directContacts.length > 0" />
+    <DirectContactList 
+      v-if="$store.state.contact.directContacts.length > 0"
+      :directContactList="directContactList"
+    />
 
     <div v-if="$store.state.contact.channels.length > 0" class="d-flex justify-space-between">
 
@@ -67,7 +75,10 @@ export default {
 
   data() {
     return {
-      drawer: true
+      drawer: true,
+      favouriteList : this.$store.state.contact.favoriteContacts,
+      directContactList : this.$store.state.contact.directContacts,
+      searchString : "",
     };
   },
 
@@ -97,7 +108,12 @@ export default {
       }
 
 
-    }
+    },
+
+    handleSearch(){
+      this.directContactList = this.$store.state.contact.directContacts.filter( (item) =>  item.contact_name.toLowerCase().includes(this.searchString.toLowerCase()) );
+      this.favouriteList = this.$store.state.contact.favoriteContacts.filter( (item) =>  item.contact_name.toLowerCase().includes(this.searchString.toLowerCase()) );
+    },
 
   }
 

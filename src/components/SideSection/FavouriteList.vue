@@ -3,7 +3,7 @@
     <label style="font-size: 10px">FAVOURITES</label>
     <v-list dense dark color="#262626">
       <v-list-item
-        v-for="(item, index) in $store.state.contact.favoriteContacts"
+        v-for="(item, index) in favouriteList"
         :key="index"
         dense
         link
@@ -29,6 +29,8 @@ import Chat from '../../Repository/Chat';
 
 
 export default {
+
+  props : ['favouriteList'],
 
   created(){
     this.$store.state.socket.on('private:joined' , (payload) => {

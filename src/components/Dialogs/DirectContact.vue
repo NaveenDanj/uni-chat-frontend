@@ -43,7 +43,7 @@
             three-line
             color="#262626"
             height="200"
-            style="overflow-y: scroll"
+            style="overflow-y: auto"
           >
             <v-subheader>Direct Contacts</v-subheader>
 
