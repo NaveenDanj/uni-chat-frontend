@@ -8,7 +8,7 @@
 
     <v-card color="#262626" dark>
       <v-toolbar class="transparent" elevation="0" color="success" dark>
-        <v-toolbar-title class="subheading">Contacts</v-toolbar-title>
+        <v-toolbar-title class="subheading">Add to favourite</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon small class="mr-0" @click.stop="dialog = false">
           <v-icon>mdi-close</v-icon>
@@ -16,9 +16,14 @@
       </v-toolbar>
 
       <v-card-text class="pa-5">
-        <v-form>
+        <v-form @submit="handleSubmit">
+          
           <v-alert v-model="errorShow" class="mb-5" dense outlined type="error">
             {{ error }}
+          </v-alert>
+
+          <v-alert v-model="successShow" class="mb-5" dense outlined type="success">
+            {{ success }}
           </v-alert>
 
           <v-text-field
@@ -27,6 +32,8 @@
             dense
             class="mt-2"
             append-icon="mdi-magnify"
+            v-model="searchString"
+            @input="handleSearch"
           />
 
           <v-list
@@ -36,59 +43,125 @@
             three-line
             color="#262626"
             height="200"
-            style="overflow-y: scroll"
+            style="overflow-y: auto"
           >
-            <v-subheader>Contacts</v-subheader>
+            <v-subheader>Direct Contacts</v-subheader>
 
-            <v-list-item-group v-model="settings" multiple active-class="">
+            <v-list-item-group v-model="favouriteList" multiple active-class="">
               <v-list-item
                 dense
-                v-for="(item, index) in [1, 1, 1, 1, 1, 1]"
+                v-for="(item, index) in constactList"
                 :key="index"
               >
                 <template v-slot:default="{ active }">
+
                   <v-list-item-action class="my-auto">
                     <v-checkbox :input-value="active"></v-checkbox>
                   </v-list-item-action>
 
                   <v-list-item-avatar class="mr-3 my-auto">
                     <img
-                      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                      :src="profile_image(item)"
                     />
                   </v-list-item-avatar>
 
                   <v-list-item-content class="my-auto">
-                    <v-list-item-title>Naveen Hettiwaththa</v-list-item-title>
+                    <v-list-item-title>{{item.contact_name}}</v-list-item-title>
                   </v-list-item-content>
+
                 </template>
               </v-list-item>
             </v-list-item-group>
           </v-list>
 
+          <v-card-actions>
+
+            <v-spacer></v-spacer>
+
+            <v-btn color="red" @click.stop="dialog = false" text>cancel</v-btn>
+
+            <v-btn type="submit" :disabled="favouriteList.length == 0" color="success">
+              <v-icon>mdi-send</v-icon>
+            </v-btn>
+
+          </v-card-actions>
+
         </v-form>
       </v-card-text>
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="red" @click.stop="dialog = false" text>cancel</v-btn>
-        <v-btn color="success">
-            <v-icon>mdi-send</v-icon>
-        </v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import Contact from '../../Repository/Contact';
+
+
 export default {
   data() {
     return {
       dialog: false,
-      settings: [],
       showContact: false,
       errorShow: false,
       error: "Sample error",
+      favouriteList : [],
+      searchString : "",
+      constactList : this.$store.state.contact.directContacts,
+
+      successShow : false,
+      success : ''
+
     };
   },
+
+  computed : {
+
+    directContacts(){
+      return this.$store.state.contact.directContacts;
+    },
+
+  },
+
+  methods: {
+
+    handleSearch(){
+      this.constactList = this.$store.state.contact.directContacts.filter( (item) =>  item.contact_name.toLowerCase().includes(this.searchString.toLowerCase()) );
+    },
+
+    profile_image(item){
+      return process.env.VUE_APP_SOCKET_URL +  item.user.profile_image
+    },
+
+    async handleSubmit(e){
+      e.preventDefault();
+
+      this.successShow = false;
+      this.errorShow = false;
+
+      try{
+
+        for(let i = 0; i < this.favouriteList.length; i++){
+          let form = {
+            contactId : this.constactList[this.favouriteList[i]].contact_id+''
+          }
+          // console.log(this.constactList[this.favouriteList[i]])
+          await Contact.addToFavourite(form);
+        }
+        
+        this.successShow = true;
+        this.success = "Contact added to favourite successfully";
+
+      }catch(err){
+        this.errorShow = true;
+        this.error = err.response.data.error;
+      }
+
+    }
+
+    
+
+  }
+
+
 };
 </script>

@@ -24,6 +24,18 @@ export default {
             }
         });
     
+    },
+
+    async addToFavourite(form){
+
+        return api.post('/contact/add_to_favourite' , form , {
+            headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
+
     }
 
 

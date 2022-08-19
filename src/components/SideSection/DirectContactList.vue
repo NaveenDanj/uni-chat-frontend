@@ -2,7 +2,7 @@
   <div>
     <v-list dense dark color="#262626">
       <v-list-item
-        v-for="(item, index) in $store.state.contact.directContacts"
+        v-for="(item, index) in directContactList"
         :key="index"
         dense
         link
@@ -27,7 +27,7 @@
 import Chat from '../../Repository/Chat';
 
 export default {
-  props: ["items"],
+  props: ["directContactList"],
 
   created(){
     this.$store.state.socket.on('private:joined' , (payload) => {
@@ -58,7 +58,24 @@ export default {
       // load the previous messages
       try{
         let messages = await Chat.loadUserChats(item.contact_id ,  item.room_id , 1);
-        this.$store.commit('setChatMessages' , messages.data.messages.reverse());
+        let array = messages.data.messages.reverse();
+        this.$store.commit('setChatMessages' , array);
+        let private_ids = [];
+        
+        for(let i = 0; i < array.length; i++){
+
+          if(array[i].is_read == false && array[i].to_user_id == this.$store.state.currentUser.id){
+            private_ids.push(array[i].private_id);
+          }
+
+        }
+
+        this.$store.state.socket.emit('private:readMessage' , {
+          messages : private_ids,
+          room_id : item.room_id
+        });
+        
+
       }catch(err){
         console.log(err);
       }
