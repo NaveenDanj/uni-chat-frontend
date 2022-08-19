@@ -77,7 +77,8 @@
         />
 
         <div class="d-flex ml-3 my-auto">
-          <v-btn @click="handleSendMessage" color="success">
+          <UploadFile />
+          <v-btn style="margin-left : 5px;" @click="handleSendMessage" color="success">
             <v-icon>mdi-send</v-icon>
           </v-btn>
         </div>
@@ -101,9 +102,10 @@ import OtherUserChatComponent from "../ChatComponents/OtherUserChatComponent.vue
 import CurrentUserChatComponent from "../ChatComponents/CurrentUserChatComponent.vue";
 
 import Chat from '../../Repository/Chat';
+import UploadFile from "../Dialogs/Chat/UploadFile.vue";
 
 export default {
-  components: { ProfileDetail, OtherUserChatComponent, CurrentUserChatComponent },
+  components: { ProfileDetail, OtherUserChatComponent, CurrentUserChatComponent, UploadFile },
 
   data() {
     return {
