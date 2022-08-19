@@ -4,13 +4,13 @@
 
     <div class="pa-3 ml-10" style="background-color: rgba(53, 75, 60, 0.5)">
       <p>
-        {{ item.message }}
+        {{ $store.state.chat.chat.messages[index].message }}
       </p>
     </div>
 
     <div class="d-flex mt-3" style="float: right">
       <!-- read receipt icon -->
-      <v-icon small style="color: #4eac6d">mdi-check-circle</v-icon>
+      <v-icon v-if="$store.state.chat.chat.messages[index].is_read" small style="color: #4eac6d">mdi-check-circle</v-icon>
       <label style="font-size: 12px" class="ml-2">{{
         formatDate(item.createdAt)
       }}</label>
@@ -25,7 +25,7 @@ import moment from "moment";
 
 export default {
 
-  props : ['item'],
+  props : ['item' , 'index'],
 
   methods : {
     formatDate(date){

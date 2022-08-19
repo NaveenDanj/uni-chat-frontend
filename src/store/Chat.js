@@ -35,17 +35,26 @@ const ChatStore = {
             state.chat.typing = typing;
         },
 
-        setChatTypingUsers(state , typingUsers) {
-            state.chat.typingUsers = typingUsers;
+        setChatRead(state , id){
+            for(let i = 0; i < state.chat.messages.length; i++){
+                if(state.chat.messages[i].id === id){
+                    state.chat.messages[i].is_read = true;
+                    break;
+                }
+            }
         },
 
-        setChatTypingTimeout(state , typingTimeout) {
-            state.chat.typingTimeout = typingTimeout;
-        },
+        // setChatTypingUsers(state , typingUsers) {
+        //     state.chat.typingUsers = typingUsers;
+        // },
 
-        setChatTypingTimeoutUsers(state , typingTimeoutUsers) {
-            state.chat.typingTimeoutUsers = typingTimeoutUsers;
-        },
+        // setChatTypingTimeout(state , typingTimeout) {
+        //     state.chat.typingTimeout = typingTimeout;
+        // },
+
+        // setChatTypingTimeoutUsers(state , typingTimeoutUsers) {
+        //     state.chat.typingTimeoutUsers = typingTimeoutUsers;
+        // },
 
         setChatActiveProfile(state , activeProfile) {
             state.chat.activeProfile = activeProfile;

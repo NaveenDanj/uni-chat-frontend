@@ -45,7 +45,7 @@
 
       <div v-if="activeProfile != null" class="contentMain" ref="scrollSection" @scroll="handleScroll">
 
-        <div v-for="(item , index) in messagesArray" :key="index" style="width : 100%;">
+        <div v-for="(item , index) in $store.state.chat.chat.messages" :key="index" style="width : 100%;">
 
           <OtherUserChatComponent
             v-if="item.from_user_id != currentUser.id"
@@ -55,6 +55,7 @@
           <CurrentUserChatComponent
             v-else
             :item="item"
+            :index="index"
           />
 
         </div>
@@ -158,7 +159,7 @@ export default {
 
   created(){
 
-    this.$store.state.socket.on('private:receiveMessage' , (data) => {
+    this.$store.state.socket.once('private:receiveMessage' , (data) => {
       let check = false;    
       for(let i = 0; i < this.$store.state.chat.chat.messages.length; i++){
         let msgObj = this.$store.state.chat.chat.messages[i];
@@ -172,7 +173,28 @@ export default {
         this.$store.commit('addChatMessage', data);
       }
 
+      // send read notification
+      if(data.from_user_id != this.$store.state.chat.chat.activeProfile.id ){
+        this.$store.state.socket.emit('private:readMessage' , {
+          messages : [data.private_id],
+          room_id : this.activeProfile.room_id
+        });
+      }
+
     });
+
+    this.$store.state.socket.once('private:readReceipt' , (payload) => {
+      for(let i = 0; i < payload.length; i++){
+        console.log('private id is : ' , payload[i]);
+        this.$store.commit('setChatRead', payload[i]);
+      }
+
+    });
+
+    // this.$store.state.socket.once('private:receiveMyMessage' , (payload) => {
+    //   console.log(payload);
+    //   this.$store.commit('addChatMessage', payload);
+    // })
 
   },
 
@@ -181,13 +203,16 @@ export default {
     handleSendMessage(){
 
       if(this.message != ''){
+
+        let _id = Date.now()+'' + this.$store.state.socket.id;
         
         this.$store.state.socket.emit("private:sendMessage" , {
           message: this.message,
           user_from: this.$store.state.currentUser,
           user_to: this.activeProfile,
           date : new Date(),
-          room_id: this.activeProfile.room_id
+          room_id: this.activeProfile.room_id,
+          private_id : _id
         });
 
         // add to store
@@ -198,7 +223,8 @@ export default {
           from_user_id : this.$store.state.currentUser.id,
           date : new Date(),
           room_id: this.activeProfile.room_id,
-          id : Date.now()+'' + this.$store.state.socket.id
+          id : _id,
+          is_read : false
         });
 
         this.message = '';
@@ -236,15 +262,29 @@ export default {
           }
 
           let messages = await Chat.loadUserChats(this.activeProfile.contact_id ,  this.activeProfile.room_id , this.currentChatPage);
-          
           let reversed =  messages.data.messages;
-          
+          let private_ids = [];
+
           for (let i = 0; i < reversed.length; i++) {
             this.$store.commit('prependChatMessage' , reversed[i]);
           }
         
           if (reversed.length > 0){
             this.currentChatPage++;
+
+            for(let i = 0; i < reversed.length; i++){
+
+              if(reversed[i].is_read == false && reversed[i].to_user_id == this.$store.state.currentUser.id){
+                private_ids.push(array[i].private_id);
+              }
+
+            }
+
+            this.$store.state.socket.emit('private:readMessage' , {
+              messages : private_ids,
+              room_id : this.activeProfile.room_id
+            });
+
           }
 
         }catch(err){
