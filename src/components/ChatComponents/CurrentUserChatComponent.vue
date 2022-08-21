@@ -1,6 +1,6 @@
 <template>
 
-  <div class="mt-2" style="max-width: 80%; min-width: 20%; float: right">
+  <div class="mt-2" style="max-width: 80%; min-width: 40%; float: right">
 
     <div class="pa-3 ml-10" style="background-color: rgba(53, 75, 60, 0.5)">
       <p>

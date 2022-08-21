@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-2" style="max-width: 80%; min-width: 20%">
+  <div class="mt-2" style="max-width: 50%; min-width: auto">
     <div class="pa-3 ml-10" style="background-color: #383838">
       <p>
         {{ item.message }}
