@@ -16,6 +16,12 @@
       :item="$store.state.chat.chat.messages[index]"
     />
 
+    <FileChatComponent
+      v-else-if="item.message_type == 'file' || item.message_type == 'video' " 
+      belong="me"
+      :item="$store.state.chat.chat.messages[index]"
+    />
+
     <div class="d-flex mt-3" style="float: right">
       <!-- read receipt icon -->
       <v-icon v-if="$store.state.chat.chat.messages[index].is_read" small style="color: #4eac6d">mdi-check-circle</v-icon>
@@ -31,6 +37,7 @@
 <script>
 import moment from "moment";
 import ImageChatComponent from "./Types/ImageChatComponent.vue";
+import FileChatComponent from "./Types/FileChatComponent.vue";
 
 export default {
     props: ["item", "index"],
@@ -45,6 +52,6 @@ export default {
             }
         },
     },
-    components: { ImageChatComponent }
+    components: { ImageChatComponent, FileChatComponent }
 };
 </script>
