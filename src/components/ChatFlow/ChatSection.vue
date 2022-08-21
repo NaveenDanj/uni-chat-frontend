@@ -191,11 +191,6 @@ export default {
 
     });
 
-    // this.$store.state.socket.once('private:receiveMyMessage' , (payload) => {
-    //   console.log(payload);
-    //   this.$store.commit('addChatMessage', payload);
-    // })
-
   },
 
   methods : {
@@ -207,6 +202,7 @@ export default {
         let _id = Date.now()+'' + this.$store.state.socket.id;
         
         this.$store.state.socket.emit("private:sendMessage" , {
+          message_type : 'text',
           message: this.message,
           user_from: this.$store.state.currentUser,
           user_to: this.activeProfile,
@@ -217,6 +213,7 @@ export default {
 
         // add to store
         this.$store.commit('addChatMessage' , {
+          message_type : 'text',
           message: this.message,
           user_from: this.$store.state.currentUser,
           user_to: this.activeProfile,

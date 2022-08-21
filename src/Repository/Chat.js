@@ -12,6 +12,19 @@ export default {
             }
         });
 
+    },
+
+    async uploadFile(form){
+
+        return api.post(`/chat/upload-file` , form , {
+
+            headers : {
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+
+        });
+
     }
 
 }

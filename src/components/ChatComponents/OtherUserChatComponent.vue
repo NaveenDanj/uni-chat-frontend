@@ -1,10 +1,17 @@
 <template>
   <div class="mt-2" style="max-width: 50%; min-width: auto">
-    <div class="pa-3 ml-10" style="background-color: #383838">
+
+    <div v-if="item.message_type == 'text' " class="pa-3 ml-10" style="background-color: #383838">
       <p>
         {{ item.message }}
       </p>
     </div>
+
+    <ImageChatComponent 
+      v-else-if="item.message_type == 'image' " 
+      belong="other"
+      :item="item"
+    />
 
     <div class="mt-2 d-flex">
       <v-avatar size="30px" class="my-auto">
@@ -17,31 +24,30 @@
         formatDate(item.createdAt)
       }}</label>
     </div>
+
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import ImageChatComponent from "./Types/ImageChatComponent.vue";
 
 export default {
-  props: ["item"],
-
-  methods: {
-    
-    formatDate(date) {
-      // if date is today then return time
-      if (moment(date).isSame(moment(), "day")) {
-        return moment(date).format("h:mm a");
-      } else {
-        return moment(date).format("MMM DD");
-      }
+    props: ["item"],
+    methods: {
+        formatDate(date) {
+            // if date is today then return time
+            if (moment(date).isSame(moment(), "day")) {
+                return moment(date).format("h:mm a");
+            }
+            else {
+                return moment(date).format("MMM DD");
+            }
+        },
+        profileImage() {
+            return process.env.VUE_APP_SOCKET_URL + this.$store.state.chat.chat.activeProfile.user.profile_image;
+        }
     },
-
-    profileImage(){
-      return process.env.VUE_APP_SOCKET_URL + this.$store.state.chat.chat.activeProfile.user.profile_image;
-    }
-
-
-  },
+    components: { ImageChatComponent }
 };
 </script>
