@@ -13,6 +13,12 @@
       :item="item"
     />
 
+    <FileChatComponent
+      v-else-if="item.message_type == 'file' || item.message_type == 'video' " 
+      belong="other"
+      :item="item"
+    />
+
     <div class="mt-2 d-flex">
       <v-avatar size="30px" class="my-auto">
         <img
@@ -31,6 +37,7 @@
 <script>
 import moment from "moment";
 import ImageChatComponent from "./Types/ImageChatComponent.vue";
+import FileChatComponent from "./Types/FileChatComponent.vue";
 
 export default {
     props: ["item"],
@@ -48,6 +55,6 @@ export default {
             return process.env.VUE_APP_SOCKET_URL + this.$store.state.chat.chat.activeProfile.user.profile_image;
         }
     },
-    components: { ImageChatComponent }
+    components: { ImageChatComponent, FileChatComponent }
 };
 </script>

@@ -142,7 +142,7 @@ export default {
 
         console.log(res);
 
-        let msg = res.data.file.file_path + "|" + this.message;
+        let msg = res.data.file.file_path + "|" + res.data.file.file_original_name + "|" + res.data.file.file_size + "|" + this.message;
         
         this.$store.state.socket.emit("private:sendMessage" , {
           message_type : res.data.file.file_type,
