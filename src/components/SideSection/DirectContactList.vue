@@ -30,7 +30,7 @@ export default {
   props: ["directContactList"],
 
   created(){
-    this.$store.state.socket.on('private:joined' , (payload) => {
+    this.$store.state.socket.once('private:joined' , (payload) => {
       console.log(payload);
     });
   },

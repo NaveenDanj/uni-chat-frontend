@@ -33,7 +33,7 @@ export default {
   props : ['favouriteList'],
 
   created(){
-    this.$store.state.socket.on('private:joined' , (payload) => {
+    this.$store.state.socket.once('private:joined' , (payload) => {
       console.log(payload);
     });
   },
@@ -59,6 +59,7 @@ export default {
 
       // load the previous messages
       try{
+        let private_ids = [];
         let messages = await Chat.loadUserChats(item.contact_id ,  item.room_id , 1);
         let array = messages.data.messages.reverse();
         this.$store.commit('setChatMessages' , array);
