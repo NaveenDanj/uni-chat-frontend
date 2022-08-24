@@ -86,9 +86,13 @@
 
         <v-divider class="pa-0" dark />
 
-        <Media />
+        <Media
+          :list="mediaList"
+        />
         <v-divider class="pa-0" dark />
-        <AttachedFiles />
+        <AttachedFiles
+          :list="fileList"
+        />
 
         <CommonSnackbar
           :snackbar="snackShow"
@@ -119,9 +123,34 @@ export default {
     return{
       snackShow : false,
       snackText : '',
-      snackColor : 'red'
+      snackColor : 'red',
+
+      mediaList : [],
+      fileList : []
+
     }
-  }, 
+  },
+
+  async created(){
+    try{
+
+      let media_res = await Auth.getUserMedia(1 , 15);
+      console.log(media_res);
+
+      for(let i = 0; i < media_res.data.files.length; i++){
+
+        if(media_res.data.files[i].file_type == 'file'){
+          this.fileList.push(media_res.data.files[i]);
+        }else{
+          this.mediaList.push(media_res.data.files[i]); 
+        }
+
+      }
+
+    }catch(err){
+      console.log(err);
+    }
+  },
 
   methods: {
     handleOpenFileDialog() {

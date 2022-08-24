@@ -55,6 +55,18 @@ export default {
                 'Authorization': localStorage.getItem('token')
             }
         });
+    },
+
+    async getUserMedia(page , limit){
+
+        return api.get(`/chat/get-user-media?page=${page}&limit=${limit}` , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
+
     }
 
 }
