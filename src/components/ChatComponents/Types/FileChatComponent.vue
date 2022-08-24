@@ -53,12 +53,10 @@ export default {
     methods : {
 
         convertKBtoMB(size){
-            console.log(size);
             return (size / 1024).toFixed(2)+"" + " MB" 
         },
 
         handleDownloadFile(){
-            console.log(this.item);
             window.open(this.item.message.split("|")[0], '_blank');
         }
 

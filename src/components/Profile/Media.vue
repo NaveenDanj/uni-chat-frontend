@@ -8,23 +8,38 @@
     </div>
 
     <div class="d-flex justify-start mt-2">
-      <img
-        width="80"
-        height="80"
-        class="mr-2"
-        src="https://themesbrand.com/doot/layouts/assets/images/small/img-1.jpg"
-      />
-      <img
-        width="80"
-        height="80"
-        class="mr-2"
-        src="https://themesbrand.com/doot/layouts/assets/images/small/img-2.jpg"
-      />
-      <img
-        width="80"
-        height="80"
-        src="https://themesbrand.com/doot/layouts/assets/images/small/img-1.jpg"
-      />
+
+      <div v-for="(item , index) in list" :key="index">
+        
+        <div v-if="item.file_type == 'image' ">
+          <img
+            width="80"
+            height="80"
+            class="mr-2"
+            :src="item.file_path"
+          />
+        </div>
+
+        <div v-if="item.file_type == 'video' ">
+
+          <video width="80" height="80" controls>
+            <source :src="item.file_path" />
+          </video>
+
+        </div>
+      
+      </div>
+
+
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  
+  props : ['list']
+
+
+}
+</script>
