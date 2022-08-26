@@ -2,9 +2,7 @@
   <div class="pa-3">
     <div class="d-flex justify-space-between">
       <label class="my-auto" style="font-size: 13px">MEDIA</label>
-      <v-btn class="my-auto" color="success" text style="font-size: 13px"
-        >Show all</v-btn
-      >
+      <ShowMoreMedia />
     </div>
 
     <div class="d-flex justify-start mt-2">
@@ -36,10 +34,9 @@
 </template>
 
 <script>
+import ShowMoreMedia from '../Dialogs/profile/ShowMoreMedia.vue';
 export default {
-  
-  props : ['list']
-
-
+    props: ["list"],
+    components: { ShowMoreMedia }
 }
 </script>
