@@ -46,7 +46,7 @@
           </v-col>
 
           <div
-            style="width: 100%; height: 300px"
+            style="width: 100%; height: 300px; border : 1px dashed white"
             v-if="list.length == 0"
             class="d-flex justify-center align-center"
           >

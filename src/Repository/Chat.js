@@ -14,9 +14,9 @@ export default {
 
     },
 
-    async uploadFile(form){
+    async uploadFile(form , to_user){
 
-        return api.post(`/chat/upload-file` , form , {
+        return api.post(`/chat/upload-file?to_user=${to_user}` , form , {
 
             headers : {
                 'Accept': 'application/json',

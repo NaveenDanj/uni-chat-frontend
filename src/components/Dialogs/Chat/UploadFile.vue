@@ -136,8 +136,10 @@ export default {
 
         let form = new FormData();
         form.append('file', this.selectedFile);
+        let to_user = this.$store.state.chat.chat.activeProfile.id;
+        console.log("to user: " , to_user);
 
-        let res = await Chat.uploadFile(form);
+        let res = await Chat.uploadFile(form , to_user);
         let _id = Date.now()+'' + this.$store.state.socket.id;
 
         console.log(res);

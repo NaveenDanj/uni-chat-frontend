@@ -2,9 +2,7 @@
   <div class="pa-3">
     <div class="d-flex justify-space-between">
       <label class="my-auto" style="font-size: 13px">ATTACHED FILES</label>
-      <v-btn class="my-auto" color="success" text style="font-size: 13px"
-        >Show all</v-btn
-      >
+      <ShowMoreFile />
     </div>
 
     <v-list dark color="#262626">
@@ -42,25 +40,20 @@
 </template>
 
 <script>
+import ShowMoreFile from '../Dialogs/profile/ShowMoreFile.vue';
 export default {
-  
-  props : ['list'],
-
-  methods : {
-
-    fileNameFormatter(filename){
-      return filename.length > 15 ? filename.slice(0 , 15) + "..." : filename;
+    props: ["list"],
+    methods: {
+        fileNameFormatter(filename) {
+            return filename.length > 15 ? filename.slice(0, 15) + "..." : filename;
+        },
+        formatSize(size) {
+            return (size / 1024).toFixed(2) + "" + "MB";
+        },
+        handleDownload(path) {
+            window.open(path, "_blank");
+        }
     },
-
-    formatSize(size){
-      return (size / 1024).toFixed(2)+ "" + "MB"
-    },
-
-    handleDownload(path){
-      window.open(path , '_blank');
-    }
-
-  }
-
+    components: { ShowMoreFile }
 }
 </script>
