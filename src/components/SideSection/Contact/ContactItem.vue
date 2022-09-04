@@ -43,9 +43,9 @@
             <v-list-item-icon class="my-auto">
               <v-icon dark class="white--text" x-small>mdi-cancel</v-icon>
             </v-list-item-icon>
-          </v-list-item>
+          </v-list-item> 
 
-          <v-list-item link>
+          <v-list-item @click="showRemoveDialog = true" link>
             <v-list-item-title class="my-auto">Remove</v-list-item-title>
 
             <v-list-item-icon class="my-auto">
@@ -63,6 +63,11 @@
             @close="showBlockDialog = false"
           />
 
+          <RemoveContact
+            :showDialog="showRemoveDialog"
+            @close="showRemoveDialog = false"
+          />
+
 
         </v-list>
       </v-menu>
@@ -74,6 +79,7 @@
 import Chat from "../../../Repository/Chat";
 import EditContact from "../../Dialogs/Contact/EditContact.vue";
 import BlockContact from "../../Dialogs/Contact/BlockContact.vue";
+import RemoveContact from "../../Dialogs/Contact/RemoveContact.vue";
 
 export default {
     props: ["contact"],
@@ -113,12 +119,13 @@ export default {
             }
         },
     },
-    components: { EditContact, BlockContact },
+    components: { EditContact, BlockContact, RemoveContact },
 
     data(){
         return{
             showEditDialog : false,
-            showBlockDialog : false
+            showBlockDialog : false,
+            showRemoveDialog : false
         }
     }
 };
