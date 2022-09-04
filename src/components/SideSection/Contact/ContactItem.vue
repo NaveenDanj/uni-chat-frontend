@@ -37,7 +37,7 @@
             </v-list-item-icon>
           </v-list-item>
 
-          <v-list-item link>
+          <v-list-item @click="showBlockDialog = true" link>
             <v-list-item-title class="my-auto">Block</v-list-item-title>
 
             <v-list-item-icon class="my-auto">
@@ -58,6 +58,11 @@
             @close="showEditDialog = false"
           />
 
+          <BlockContact
+            :showDialog="showBlockDialog"
+            @close="showBlockDialog = false"
+          />
+
 
         </v-list>
       </v-menu>
@@ -68,6 +73,7 @@
 <script>
 import Chat from "../../../Repository/Chat";
 import EditContact from "../../Dialogs/Contact/EditContact.vue";
+import BlockContact from "../../Dialogs/Contact/BlockContact.vue";
 
 export default {
     props: ["contact"],
@@ -107,11 +113,12 @@ export default {
             }
         },
     },
-    components: { EditContact },
+    components: { EditContact, BlockContact },
 
     data(){
         return{
             showEditDialog : false,
+            showBlockDialog : false
         }
     }
 };
