@@ -61,6 +61,7 @@
           <BlockContact
             :showDialog="showBlockDialog"
             @close="showBlockDialog = false"
+            :contact="contact"
           />
 
           <RemoveContact
