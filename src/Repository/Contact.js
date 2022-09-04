@@ -26,6 +26,18 @@ export default {
 
     },
 
+    async blockContact(form){
+
+        return api.post('/contact/block' , form , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
+
+    },
+
     async getAllContacts(){
             
         return api.get('/contact/get_current_user_contact' , {
