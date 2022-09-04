@@ -66,6 +66,7 @@
           <RemoveContact
             :showDialog="showRemoveDialog"
             @close="showRemoveDialog = false"
+            :contact="contact"
           />
 
 
