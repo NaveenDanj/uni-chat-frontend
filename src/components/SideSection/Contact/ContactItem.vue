@@ -56,6 +56,7 @@
           <EditContact
             :showDialog="showEditDialog"
             @close="showEditDialog = false"
+            :contact="contact"
           />
 
           <BlockContact

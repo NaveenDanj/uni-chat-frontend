@@ -60,6 +60,18 @@ export default {
             }
         });
 
+    },
+
+    async updateContact(form){
+
+        return api.put('/contact/update' , form , {
+            headers : {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        })
+
     }
 
 
