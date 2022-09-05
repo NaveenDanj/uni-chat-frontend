@@ -75,15 +75,30 @@ export default {
       successShow: false,
 
       form: {
-        contactId: this.contact.user.userId,
-        contactName: this.contact.contact_name,
+        contactId: '',
+        contactName: '',
       },
     };
   },
 
+  watch : {
+
+    showDialog(val){
+        console.log("new val : " , val , this.form.contactId , this.form.contactName);
+        this.form.contactId = this.contact.user.userId,
+        this.form.contactName = this.contact.contact_name
+    }
+    
+  },
+
+  created(){
+    this.form.contactId = this.contact.user.userId,
+    this.form.contactName = this.contact.contact_name
+  },
+
   methods: {
     async close() {
-      this.$refs.addForm.reset();
+    //   this.$refs.addForm.reset();
       //   this.dialog = false;
       this.$emit("close");
     },
