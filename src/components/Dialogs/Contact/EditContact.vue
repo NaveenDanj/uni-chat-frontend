@@ -10,7 +10,7 @@
       </v-toolbar>
 
       <v-card-text class="pa-5">
-        <v-form ref="addForm">
+        <v-form ref="addForm" @submit="editForm">
           <v-alert v-model="errorShow" class="mb-5" dense outlined type="error">
             {{ error }}
           </v-alert>
@@ -28,12 +28,12 @@
           <div>
             <label style="font-weight: bold">User ID</label>
             <v-text-field
+              readonly
               label="Enter User ID"
               v-model="form.contactId"
               outlined
               dense
               class="mt-2"
-              :rules="[(v) => !!v || 'User ID is required']"
             />
           </div>
 
@@ -60,10 +60,11 @@
   </v-dialog>
 </template>
   
-  <script>
+<script>
+import Contact from '../../../Repository/Contact';
 
 export default {
-  props: ["showDialog"],
+  props: ["showDialog", "contact"],
 
   data() {
     return {
@@ -74,20 +75,50 @@ export default {
       successShow: false,
 
       form: {
-        contactId: "",
-        contactName: "",
+        contactId: this.contact.user.userId,
+        contactName: this.contact.contact_name,
       },
     };
   },
 
   methods: {
-    
     async close() {
-      this.form.contactId = "";
-      this.form.contactName = "";
       this.$refs.addForm.reset();
       //   this.dialog = false;
       this.$emit("close");
+    },
+
+    async editForm(e) {
+
+      e.preventDefault();
+
+      if (!this.$refs.addForm.validate()) {
+        return;
+      }
+
+      this.errorShow = false;
+      this.error = "";
+
+      this.successShow = false;
+      this.success = "";
+
+      try{
+
+        let res = await Contact.updateContact({
+            contactId : this.contact.contact_id.toString(),
+            contactName : this.form.contactName
+        });
+
+        this.successShow = true;
+        this.success = "Contact updated successfully!";
+
+        window.location.reload();
+
+      }catch(err){
+        this.errorShow = true;
+        this.error = err.response.data.error;
+      }
+
     },
   },
 };
