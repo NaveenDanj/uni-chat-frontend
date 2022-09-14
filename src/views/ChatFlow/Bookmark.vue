@@ -8,16 +8,22 @@
 
     <div class="mt-6">
       <v-text-field
+        v-model="search"
         outlined
         placeholder="Search bookmark..."
         append-icon="mdi-magnify"
         dense
         dark
         block
+        @input="handleSearch"
       />
     </div>
 
-    <div class="mt-0" style="height : 81vh; overflow: auto;" @scroll="handleScroll">
+    <div
+      class="mt-0"
+      style="height: 81vh; overflow: auto"
+      @scroll="handleScroll"
+    >
       <v-list dark color="#262626">
         <div v-for="(item, index) in list" :key="index">
           <BookmarkItem :bookmark="item" />
@@ -39,6 +45,7 @@ export default {
   data() {
     return {
       list: [],
+      search: "",
     };
   },
   methods: {
@@ -52,11 +59,19 @@ export default {
       }
     },
 
-    handleScroll(){
-      console.log('scrolled!');
-    }
+    handleScroll() {
+      console.log("scrolled!");
+    },
 
-
+    async handleSearch() {
+      if (this.search.length > 0) {
+        let searchRes = await Bookmark.searchBookmarks(this.search);
+        console.log(searchRes);
+        this.list = searchRes.data.bookmarks;
+      } else {
+        this.loadBookmars();
+      }
+    },
   },
   components: { BookmarkItem },
 };
