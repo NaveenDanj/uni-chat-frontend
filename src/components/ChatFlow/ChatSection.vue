@@ -159,7 +159,7 @@ export default {
 
   created(){
 
-    this.$store.state.socket.once('private:receiveMessage' , (data) => {
+    this.$store.state.socket.on('private:receiveMessage' , (data) => {
       let check = false;    
       for(let i = 0; i < this.$store.state.chat.chat.messages.length; i++){
         let msgObj = this.$store.state.chat.chat.messages[i];
@@ -183,7 +183,7 @@ export default {
 
     });
 
-    this.$store.state.socket.once('private:readReceipt' , (payload) => {
+    this.$store.state.socket.on('private:readReceipt' , (payload) => {
       for(let i = 0; i < payload.length; i++){
         console.log('private id is : ' , payload[i]);
         this.$store.commit('setChatRead', payload[i]);

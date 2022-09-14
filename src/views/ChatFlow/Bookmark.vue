@@ -17,33 +17,10 @@
       />
     </div>
 
-    <div class="mt-0">
+    <div class="mt-0" style="height : 81vh; overflow: auto;" @scroll="handleScroll">
       <v-list dark color="#262626">
-        <div
-          v-for="(item, index) in list"
-          :key="index"
-        >
-          <v-list-item class="mt-2">
-            <v-list-item-avatar>
-              <v-icon color="success">mdi-file-document-outline</v-icon>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>
-                <div class="d-flex justify-space-between">
-                  <label class="my-auto" style="font-size: 13px">
-                    <span style="color: #9ba2a9">design-phase-1...</span><br />
-                    <span style="color: #9ba2a9">12.5MB</span>
-                  </label>
-
-                  <v-btn x-small icon fab>
-                    <v-icon style="color: #9ba2a9">mdi-dots-vertical</v-icon>
-                  </v-btn>
-                </div>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          
+        <div v-for="(item, index) in list" :key="index">
+          <BookmarkItem :bookmark="item" />
           <v-divider dark />
         </div>
       </v-list>
@@ -53,28 +30,34 @@
 
 <script>
 import Bookmark from "../../Repository/Bookmark";
+import BookmarkItem from "../../components/Bookmark/BookmarkItem.vue";
 
 export default {
   created() {
     this.loadBookmars();
   },
-
   data() {
     return {
       list: [],
     };
   },
-
   methods: {
     async loadBookmars() {
       try {
         let data = await Bookmark.getAllBookmarks();
-        this.list = data.data.bookmarks
+        this.list = data.data.bookmarks;
         console.log(this.list);
       } catch (err) {
         console.log(err);
       }
     },
+
+    handleScroll(){
+      console.log('scrolled!');
+    }
+
+
   },
+  components: { BookmarkItem },
 };
 </script>

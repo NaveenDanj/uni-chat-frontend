@@ -16,32 +16,32 @@
       style="border: 0.8px solid rgba(60, 175, 80, 0.3); width: 100%"
       class="pa-6 mb-2 d-flex justify-space-between"
     >
-
       <div class="pa-0 d-flex justify-start my-auto">
-
         <div class="my-auto">
           <v-icon color="success">mdi-file-document-outline</v-icon>
         </div>
 
         <div class="my-auto ml-4">
-          <label style="color: #9ba2a9; font-size : 13px;">{{ item.message.split("|")[1] }}</label
+          <label style="color: #9ba2a9; font-size: 13px">{{
+            item.message.split("|")[1]
+          }}</label
           ><br />
-          <label style="color: #9ba2a9; font-size : 13px;">{{
+          <label style="color: #9ba2a9; font-size: 13px">{{
             convertKBtoMB(+item.message.split("|")[2])
           }}</label>
         </div>
-
       </div>
 
       <div class="my-auto">
         <v-btn x-small icon fab>
-          <v-icon @click="handleDownloadFile" style="color: #9ba2a9">mdi-download</v-icon>
+          <v-icon @click="handleDownloadFile" style="color: #9ba2a9"
+            >mdi-download</v-icon
+          >
         </v-btn>
       </div>
     </div>
 
-    <label class="mt-4">{{item.message.split("|")[3]}}</label>
-
+    <label class="mt-4">{{ item.message.split("|")[3] }}</label>
   </div>
 </template>
 
@@ -50,18 +50,14 @@
 export default {
   props: ["item", "belong"],
 
-    methods : {
+  methods: {
+    convertKBtoMB(size) {
+      return (size / 1024).toFixed(2) + "" + " MB";
+    },
 
-        convertKBtoMB(size){
-            return (size / 1024).toFixed(2)+"" + " MB" 
-        },
-
-        handleDownloadFile(){
-            window.open(this.item.message.split("|")[0], '_blank');
-        }
-
-
-    }
-
+    handleDownloadFile() {
+      window.open(this.item.message.split("|")[0], "_blank");
+    },
+  },
 };
 </script>
