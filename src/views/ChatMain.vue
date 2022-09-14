@@ -109,7 +109,7 @@ export default {
 }
 
 .detailSection:hover {
-  overflow-y: auto;
+  overflow-y: hidden;
   min-height: 100vh;
 }
 
