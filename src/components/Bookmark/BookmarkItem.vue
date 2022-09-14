@@ -1,8 +1,8 @@
 <template>
-  <v-list-item link class="mt-2">
+  <v-list-item @click="handleDownloadFile" link class="mt-2">
 
-    <v-list-item-avatar>
-      <v-icon color="success">mdi-file-document-outline</v-icon>
+    <v-list-item-avatar >
+      <v-icon  color="success">mdi-file-document-outline</v-icon>
     </v-list-item-avatar>
 
     <v-list-item-content>
