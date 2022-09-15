@@ -67,6 +67,15 @@ export default {
             }
         });
 
+    },
+
+    async editProfile(form){
+        return api.post('/user/edit-profile' , form , {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     }
 
 }
