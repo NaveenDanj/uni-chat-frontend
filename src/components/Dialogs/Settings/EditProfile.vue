@@ -198,6 +198,8 @@ export default {
             this.successShow = true;
             this.success = res.data.message;
 
+            window.location.reload();
+
         }catch(err){
             console.log(err);
             this.errorShow = true;
