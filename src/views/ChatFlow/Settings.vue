@@ -48,9 +48,10 @@
                   <label>Name</label><br />
                   <label>Adam Zampa</label>
                 </div>
-                <v-btn class="my-auto" icon fab x-small>
+                <!-- <v-btn class="my-auto" icon fab x-small>
                   <v-icon>mdi-pencil</v-icon>
-                </v-btn>
+                </v-btn> -->
+                <EditProfile />
               </div>
 
               <div class="mt-5">
@@ -97,7 +98,6 @@
                   <label>Last seen</label><br />
                   <!-- switch -->
                   <v-switch
-                    v-model="lastseen"
                     color="success"
                     style="font-size: 12px"
                   ></v-switch>
@@ -107,7 +107,6 @@
                   <label>Read receipts</label><br />
                   <!-- switch -->
                   <v-switch
-                    v-model="lastseen"
                     color="success"
                     style="font-size: 12px"
                   ></v-switch>
@@ -148,7 +147,6 @@
                 <!-- switch -->
                 <v-switch
                   class="mt-1"
-                  v-model="lastseen"
                   color="success"
                   style="font-size: 12px"
                 ></v-switch>
@@ -159,3 +157,10 @@
     </div>
   </div>
 </template>
+
+<script>
+import EditProfile from '../../components/Dialogs/Settings/EditProfile.vue';
+export default {
+    components: { EditProfile }
+}
+</script>
