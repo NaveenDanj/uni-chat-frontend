@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-10" style="height : 60vh; overflow-y:auto">
       <v-expansion-panels dark class="elevation-0">
         <v-expansion-panel style="background-color: #262626" elevation="0">
           <v-expansion-panel-header class="elevation-0">
@@ -55,54 +55,7 @@
           </v-expansion-panel-header>
 
           <v-expansion-panel-content elevation="0">
-            <div>
-              <div>
-                <div class="my-auto">
-                  <label>Profile Photo</label><br />
-                  <!-- select box -->
-                  <v-select
-                    :items="[
-                      { text: 'Public', value: 'public' },
-                      { text: 'Private', value: 'private' },
-                    ]"
-                    outlined
-                    dense
-                    color="white"
-                    value="public"
-                    style="font-size: 12px"
-                  ></v-select>
-                </div>
-
-                <div class="my-auto">
-                  <label>Last seen</label><br />
-                  <!-- switch -->
-                  <v-switch color="success" style="font-size: 12px"></v-switch>
-                </div>
-
-                <div class="my-auto">
-                  <label>Read receipts</label><br />
-                  <!-- switch -->
-                  <v-switch color="success" style="font-size: 12px"></v-switch>
-                </div>
-
-                <div class="my-auto">
-                  <label>Groups</label><br />
-                  <!-- switch -->
-                  <v-select
-                    :items="[
-                      { text: 'Everyone', value: 'everyone' },
-                      { text: 'Nobody', value: 'nobody' },
-                    ]"
-                    outlined
-                    dense
-                    color="white"
-                    value="everyone"
-                    style="font-size: 12px"
-                    dark
-                  ></v-select>
-                </div>
-              </div>
-            </div>
+            <Privacy />
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -133,16 +86,15 @@
 
 <script>
 import PersonalInfo from "../../components/Settings/PersonalInfo.vue";
+import Privacy from "../../components/Settings/Privacy.vue";
 export default {
-  components: { PersonalInfo },
+  components: { PersonalInfo, Privacy },
 
   methods : {
 
     profilePic(){
       return process.env.VUE_APP_SOCKET_URL + this.$store.state.currentUser.profile_image
     }
-
-
 
   }
 
