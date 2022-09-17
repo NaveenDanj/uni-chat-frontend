@@ -76,6 +76,33 @@ export default {
                 'Authorization': localStorage.getItem('token')
             }
         });
+    },
+
+    async updateProfileImagePrivacy(form){
+        return api.post('/user/update-profile-photo-privacy' , form , {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
+    },
+
+    async updateshowOnlinePrivacy(form){
+        return api.post('/user/update-show-online-privacy' , form , {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
+    },
+
+    async updateReadReceiptPrivacy(form){
+        return api.post('/user/update-read-receipt-privacy' , form , {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     }
 
 }
