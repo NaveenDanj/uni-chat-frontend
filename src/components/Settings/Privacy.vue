@@ -95,7 +95,6 @@ export default {
     },
 
     async handleUpdateReadReceipt() {
-      console.log(this.read_receipt)
       try {
         await Auth.updateReadReceiptPrivacy({
           status: this.read_receipt,
