@@ -12,7 +12,7 @@
             </v-btn>
           </div>
 
-          <v-avatar @click="drawer = true" size="40px" class="my-auto">
+          <v-avatar size="40px" class="my-auto">
             <img
               v-if="activeProfile != undefined && activeProfile.user.profile_image != 'Icon' "
               :src="profileImage(activeProfile)"
@@ -23,7 +23,7 @@
           </v-avatar>
 
           <div class="my-auto ml-3">
-            <label @click="drawer = true">{{ activeProfile != null ? activeProfile.contact_name : '' }}</label><br />
+            <label >{{ activeProfile != null ? activeProfile.contact_name : '' }}</label><br />
             <label style="font-size: 11px">{{ activeProfileOnlineStatus }}</label>
           </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="d-flex my-auto">
           <SearchChatDialog />
 
-          <v-btn icon fab small dark class="menuOptions">
+          <v-btn @click="drawer = true" icon fab small dark class="menuOptions">
             <v-icon>mdi-information</v-icon>
           </v-btn>
 
