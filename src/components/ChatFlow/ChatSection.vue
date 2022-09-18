@@ -29,9 +29,7 @@
         </div>
 
         <div class="d-flex my-auto">
-          <v-btn icon fab small dark class="menuOptions">
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
+          <SearchChatDialog />
 
           <v-btn icon fab small dark class="menuOptions">
             <v-icon>mdi-information</v-icon>
@@ -104,9 +102,10 @@ import CurrentUserChatComponent from "../ChatComponents/CurrentUserChatComponent
 
 import Chat from '../../Repository/Chat';
 import UploadFile from "../Dialogs/Chat/UploadFile.vue";
+import SearchChatDialog from "../Dialogs/SearchChatDialog.vue";
 
 export default {
-  components: { ProfileDetail, OtherUserChatComponent, CurrentUserChatComponent, UploadFile },
+  components: { ProfileDetail, OtherUserChatComponent, CurrentUserChatComponent, UploadFile, SearchChatDialog },
 
   data() {
     return {

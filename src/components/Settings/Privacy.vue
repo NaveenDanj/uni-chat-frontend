@@ -65,6 +65,13 @@
 import Auth from "../../Repository/Auth";
 
 export default {
+
+  created(){
+    this.profile_photo = this.$store.state.currentUser.profile_image_public == true ? 'Public' : 'Private';
+    this.show_online = this.$store.state.currentUser.showOnline;
+    this.read_receipt = this.$store.state.currentUser.read_receipt;
+  },
+
   data() {
     return {
       profile_photo: "Public",
@@ -79,6 +86,10 @@ export default {
         await Auth.updateProfileImagePrivacy({
           status: this.profile_photo,
         });
+
+        let me = await Auth.getCurrentUser();
+        this.$store.commit('setCurrentUser' , me.data.user);
+
       } catch (err) {
         console.log(err);
       }
@@ -86,9 +97,14 @@ export default {
 
     async handleUpdateShowOnlinePrivacy() {
       try {
+
         await Auth.updateshowOnlinePrivacy({
           status: this.show_online,
         });
+
+        let me = await Auth.getCurrentUser();
+        this.$store.commit('setCurrentUser' , me.data.user);
+
       } catch (err) {
         console.log(err);
       }
@@ -96,9 +112,14 @@ export default {
 
     async handleUpdateReadReceipt() {
       try {
+
         await Auth.updateReadReceiptPrivacy({
           status: this.read_receipt,
         });
+
+        let me = await Auth.getCurrentUser();
+        this.$store.commit('setCurrentUser' , me.data.user);
+
       } catch (err) {
         console.log(err);
       }

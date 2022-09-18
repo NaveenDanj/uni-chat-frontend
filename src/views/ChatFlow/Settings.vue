@@ -59,7 +59,7 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
 
-        <v-expansion-panel style="background-color: #262626" elevation="0">
+        <!-- <v-expansion-panel style="background-color: #262626" elevation="0">
           <v-expansion-panel-header class="elevation-0">
             <div class="d-flex">
               <v-icon class="mr-2">mdi-security</v-icon>
@@ -70,7 +70,6 @@
           <v-expansion-panel-content elevation="0">
             <div class="d-flex justify-space-between">
               <label class="mt-2">Show security notification</label>
-              <!-- switch -->
               <v-switch
                 class="mt-1"
                 color="success"
@@ -78,7 +77,7 @@
               ></v-switch>
             </div>
           </v-expansion-panel-content>
-        </v-expansion-panel>
+        </v-expansion-panel> -->
       </v-expansion-panels>
     </div>
   </div>

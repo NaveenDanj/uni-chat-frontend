@@ -25,6 +25,18 @@ export default {
 
         });
 
+    },
+
+    async searchChat(userId , roomId , query){
+
+        return api.get(`/chat/search-chat?contact_id=${userId}&room_id=${roomId}&query=${query}` , {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        })
+
     }
 
 }
